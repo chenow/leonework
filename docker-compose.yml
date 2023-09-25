@@ -1,0 +1,15 @@
+services:
+    db:
+        image: postgres:latest
+        environment:
+            - POSTGRES_DB=leonework
+            - POSTGRES_USER=leonework
+            - POSTGRES_PASSWORD=leonework
+        volumes:
+            - leonework-data:/var/lib/postgresql/data
+        ports:
+            - '${DB_PORT}:5432'
+        env_file: .env
+
+volumes:
+    leonework-data:

@@ -1,0 +1,54 @@
+{% extends 'generic/base_generic.html' %}
+{% load static %}
+{% block bg_color %}
+    background-color: rgba(230, 245, 225, 0.2)!important;
+{% endblock bg_color %}
+{% block imports %}
+    <script type="text/javascript"
+            src="{% static 'companies/base_companies.js' %}?3"
+            defer></script>
+    <script type="text/javascript"
+            src="{% static 'companies/matches.js' %}?3"
+            defer></script>
+    <link rel="stylesheet" href="{% static 'companies/companies.css' %}" />
+{% endblock imports %}
+{% block content %}
+    <h3 class="violine my-5 text-center">
+        <b>Mes matchs</b>
+    </h3>
+    <h4 class="mt-5 violine text-center">
+        <b>Voici les étudiants avec lesquelles vous avez matché !</b>
+    </h4>
+    <h6 class="mb-5 text-center">
+        Vous pouvez dès à présent prendre contact avec eux en vous rendant dans l’onglet messagerie.
+    </h6>
+    <hr class="hr" />
+    <div style="width: 50%; margin: auto; min-width: 300px">
+        <div id="carouselExampleControls"
+             class="carousel slide d-fl mt-4"
+             data-bs-ride="carousel">
+            <div class="carousel-inner"
+                 id="matches"
+                 style="width:80%;
+                        margin: 0 10%;
+                        min-height: 300px"></div>
+            <button class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                <i style="color: black; font-size: 2rem" class="bi bi-arrow-left-square"></i>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                <i style="color: black;
+                          font-size: 2rem"
+                   class="bi bi-arrow-right-square"></i>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+{% endblock content %}
+{% block script %}<script>job_pk = {{job.pk }}</script>{% endblock %}

@@ -1,0 +1,156 @@
+{% extends 'generic/base_generic.html' %}
+{% load static %}
+{% block imports %}
+{% endblock imports %}
+{% block content %}
+    <section style="background-color: #eee;">
+        <div class="container-fluid py-5">
+            <div class="row">
+                <div class="col">
+                    <div class="card mb-4">
+                        <div class="card-body row">
+                            <div class="col-lg-3 pe-5">
+                                <img {% if company.photo %} src="{{ company.photo.url }}" {% else %} src="https://via.placeholder.com/150" {% endif %}
+                                     alt="avatar"
+                                     class="rounded-pill img-fluid">
+                            </div>
+                            <div class="col-lg-9">
+                                <h3 class="bold">{{ company.last_name }}</h3>
+                                <h7 class="">
+                                Poste proposé :
+                                {{ job.proposed_job }}
+                                </h7>
+                                <div class="row mt-3">
+                                    <div class="col-sm-4 row border-secondary border-start">
+                                        <div class="col-sm-2">
+                                            <i class="bi bi-search"></i>
+                                        </div>
+                                        <div class="col-sm-10">{{ job.contract_type }}</div>
+                                    </div>
+                                    <div class="col-sm-4 row border-secondary border-start">
+                                        <div class="col-sm-2">
+                                            <i class="bi bi-calendar-check"></i>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            du {{ job.beginning_date }}
+                                            <br>
+                                            au {{ job.ending_date }}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 row border-secondary border-start">
+                                        <div class="col-sm-2">
+                                            <i class="bi bi-geo-alt"></i>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            {{ company.adresse }}
+                                        </br>
+                                        {{ company.postal_code }} {{ company.city }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body ms-2">
+                        <h4 class="my-3 bold">Profil recherché</h4>
+                        <p class="text mb-1">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 style="margin-right: 10px"
+                                 fill="currentColor"
+                                 class="bi bi-mortarboard-fill"
+                                 viewBox="0 0 16 16">
+                                <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5Z" />
+                                <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Z" />
+                            </svg>
+                            {{ job.minimal_degree }}
+                        </p>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class='bold'>Le candidat doit parler</h4>
+                        <div>
+                            {% for langue, niveau in job.langues_parlees %}
+                                <div style='color: #f0645a'
+                                     class="d-inline-block border text-center bold border-danger rounded-pill m-1 px-2 py-1">
+                                    {{ langue }}
+                                    <br>
+                                    <div class="violine" style="font-size: 0.8em">niveau {{ niveau }}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class='bold mb-4'>Détail de la mission</h4>
+                        <div class="mb-2">
+                            <i class="bi bi-people-fill me-3"></i>Encadrement :
+                            {% for encadrement in job.autonomy %}{{ encadrement }},{% endfor %}
+                        </div>
+                        <div class="mb-2">
+                            <i class="bi bi-briefcase-fill me-3"></i>Embauche possible : {{ job.hiring }}
+                        </div>
+                        <div class="mb-2">
+                            <i class="bi bi-laptop me-3"></i>Téletravail :
+                            {% if job.teleworking == 'True' %}
+                                Oui
+                            {% elif job.teleworking == 'False' %}
+                                Non
+                            {% elif job.teleworking == "None" %}
+                                A définir
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body px-5 py-4">
+                        <h4 class="bold mb-4">Description de la mission</h4>
+                        {{ job.job_description }}
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body px-5 py-4">
+                        <h4 class="bold mb-4">Valeurs de l'entreprise</h4>
+                        <div class="mt-5 mb-4">
+                            {% for valeur in job.company.company_values %}
+                                <div style='color: #f0645a'
+                                     class="d-inline-block border text-center bold border-danger rounded-pill m-1 px-2 py-1">
+                                    {{ valeur }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4 px-5 py-4">
+                    <div class="card-body">
+                        <h4 class="bold mb-4">En bref</h4>
+                        <div class="mb-2">
+                            <i class="bi bi-people-fill me-3"></i>Taille : {{ job.company.company_size }}
+                        </div>
+                        <div class="mb-2">
+                            <i class="bi bi-caret-right-fill me-3"></i>Domaine d'activité : {{ job.company.principal_activity }}
+                        </div>
+                        <div class="mb-2">
+                            <i class="bi bi-chat-right-dots-fill me-3"></i>Ambiance générale :
+                            {% for ambiance in job.company.overall_atmospheres %}{{ ambiance }},{% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mx-4 mt-5">
+            <i class="bi bi-caret-left-fill me-1"></i><a href="{% url 'home:index' %}">Retours ��� mes entreprises</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

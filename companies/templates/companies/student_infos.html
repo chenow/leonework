@@ -1,0 +1,189 @@
+{% extends 'generic/base_generic.html' %}
+{% load static %}
+{% block imports %}
+{% endblock imports %}
+{% block content %}
+    <section style="background-color: #eee;">
+        <div class="container-fluid py-5">
+            <div class="row">
+                <div class="col">
+                    <div class="card mb-4">
+                        <div class="card-body row">
+                            <div class="col-lg-3 pe-5">
+                                <img {% if student.photo %} src="{{ student.photo.url }}" {% else %} src="https://via.placeholder.com/150" {% endif %}
+                                     alt="avatar"
+                                     class="rounded-pill img-fluid">
+                            </div>
+                            <div class="col-lg-9">
+                                <h3 class="">
+                                    <b>{{ student.last_name }} {{ student.first_name }}</b>, {{ age }} ans
+                                </h3>
+                                <h7 class="">
+                                {% for poste in student.demanded_jobs %}
+                                    {{ poste }}
+                                    <br>
+                                {% endfor %}
+                                </h7>
+                                <div class="row mt-3">
+                                    <div class="col-sm-4 row border-secondary border-start">
+                                        <div class="col-sm-2">
+                                            <i class="bi bi-search"></i>
+                                        </div>
+                                        <div class="col-sm-10 pe-3">
+                                            {% if student.contract_type == "alternance" %}
+                                                Recherche une alternance
+                                            {% else %}
+                                                Recherche un stage
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 row border-secondary border-start">
+                                        <div class="col-sm-2">
+                                            <i class="bi bi-calendar-check"></i>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            du {{ student.beginning_date }}
+                                            <br>
+                                            au {{ student.ending_date }}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 row border-secondary border-start">
+                                        <div class="col-sm-2">
+                                            <i class="bi bi-geo-alt"></i>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            Sur :
+                                            {% for city in student.company_locations %}{{ city }},{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body ms-2">
+                            <h4 class="my-3 bold">Diplôme en préparation</h4>
+                            <p class="text mb-1">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <i class="bi bi-geo-alt"></i>
+                                    </div>
+                                    <div class="col-md-11">Ecole : {{ student.school }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <i class="bi bi-mortarboard-fill"></i>
+                                    </div>
+                                    <div class="col-md-11">{{ student.ongoing_degree }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <i class="bi bi-align-center"></i>
+                                    </div>
+                                    <div class="col-md-11">{{ student.ongoing_degree }} en préparation</div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h4 class='bold'>Langues parlées</h4>
+                            <div>
+                                {% for langue, niveau in student.spoken_languages %}
+                                    <div style='color: #f0645a'
+                                         class="d-inline-block border text-center bold border-danger rounded-pill m-1 px-2 py-1">
+                                        {{ langue }}
+                                        <br>
+                                        <div class="violine" style="font-size: 0.8em">niveau {{ niveau }}</div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h4 class='bold mb-4'>Condition de travail</h4>
+                            <div class="mb-2">
+                                <i class="bi bi-people-fill me-3"></i>{{ student.apprenticeship_rate }}
+                            </div>
+                            <div class="mb-2">
+                                <i class="bi bi-briefcase-fill me-3"></i>
+                                {% if student.work_weekend == "False" %}
+                                    Ne souhaite pas travailler le weekend
+                                {% elif student.work_weekend == "samedi" %}
+                                    Travail le samedi accepté
+                                {% elif student.work_weekend == "dimanche" %}
+                                    Travail le dimanche accepté
+                                {% elif student.work_weekend == "les_deux" %}
+                                    Travail le samedi et dimanche accepté
+                                {% endif %}
+                            </div>
+                            <div class="mb-2">
+                                <i class="bi bi-laptop me-3"></i>
+                                {% if student.teleworking == "True" %}
+                                    J'accepte le télétravail
+                                {% elif student.teleworking == "False" %}
+                                    Je ne souhaite pas faire du télétravail
+                                {% else %}
+                                    Télétravail à définir
+                                {% endif %}
+                            </div>
+                            <div class="mb-2">
+                                <i class="bi bi-back me-3"></i>
+                                Embauche :
+                                {% if student.hiring == "oui" %}
+                                    oui
+                                {% elif student.hiring == "non" %}
+                                    non
+                                {% elif student.hiring == "pourquoi_pas" %}
+                                    à définir
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-body px-5 py-4">
+                            <h4 class="bold mb-4">Mes expériences</h4>
+                            <div class="m-3 p-2 border-top">
+                                <i class="bi bi-mortarboard-fill me-3"></i>{{ student.last_degree }}
+                            </div>
+                            {% for type, company, duree in student.experiences %}
+                                <div class="m-3 p-2 border-top">
+                                    <i class="bi bi-star-fill me-3"></i>{{ type }} de {{ duree }} chez <b>{{ company }}</b>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-body px-5 py-4">
+                            <h4 class="bold mb-4">Mes qualités principales</h4>
+                            <div class="mt-5 mb-4">
+                                {% for valeur in student.qualities %}
+                                    <div style='color: #f0645a'
+                                         class="d-inline-block border text-center bold border-danger rounded-pill m-1 px-2 py-1">
+                                        {{ valeur }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4 px-5 py-4">
+                        <div class="card-body">
+                            <h4 class="bold mb-4">Dans 10 ans je me vois...</h4>
+                            <div class="mb-2">{{ student.future_vision }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mx-4 mt-5">
+                <i class="bi bi-caret-left-fill me-1"></i><a href="{% url 'home:index' %}">Retours à mes candidats</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

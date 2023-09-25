@@ -1,0 +1,14 @@
+{% extends 'generic/base_generic.html' %}
+{% block content %}
+    <div class="row justify-content-lg-center mt-5">
+        <div class="col-lg-6 text-center">
+            Le lien entré est invalide ou a expiré, veuillez redemander un nouveau mail d'activation.
+        </div>
+        <div class="row d-flex justify-content-lg-center my-5">
+            <div class="d-flex justify-content-lg-center">
+                <a href="{% url 'request-new-link-from-email' %}">Demander un
+                    nouveau lien</a> {{ msg }}
+                </div>
+            </div>
+        </div>
+    {% endblock %}

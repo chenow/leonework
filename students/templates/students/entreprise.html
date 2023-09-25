@@ -1,0 +1,185 @@
+{% extends 'generic/base_generic.html' %}
+{% load static %}
+{% block imports %}
+    <script type="text/javascript"
+            src="{% static 'students/entreprise.js' %}"
+            defer></script>
+{% endblock imports %}
+{% block content %}
+    <form novalidate
+          class="needs-validation row mt-5 d-flex justify-content-center"
+          action="{% url 'students:company' %}"
+          method="post">
+        <h3 class="mb-3 violine text-center">
+            <b>Mon entreprise idéale</b>
+        </h3>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="mt-4 mb-4 d-flex justify-content-center flex-column">
+                    <label class="w-100 mb-2">
+                        Taille de l'entreprise<span class='ps-3 text-muted'>(Plusieurs choix
+                    possibles)</span>
+                </label>
+                {% for error in company_sizes.errors %}
+                    <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+                {% endfor %}
+                {% for value, text in form.company_sizes.field.choices %}
+                    <div class="form-check form-check-inline">
+                        <input {% if value in form.company_sizes.value %}checked{% endif %}
+                               class="form-check-input"
+                               type="checkbox"
+                               name="{{ form.company_sizes.name }}"
+                               value="{{ value }}">
+                        <label class="form-check-label">{{ text }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="mt-4 mb-4 d-flex justify-content-center flex-column">
+                <label class="w-100 mb-2">
+                    Ambiance Générale ?<span class='ps-3 text-muted'>(Plusieurs choix
+                possibles)</span>
+            </label>
+            {% for error in overall_atmospheres.errors %}
+                <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+            {% endfor %}
+            {% for value, text in form.overall_atmospheres.field.choices %}
+                <div class="form-check form-check-inline">
+                    <input {% if value in form.overall_atmospheres.value %}checked{% endif %}
+                           class="form-check-input"
+                           type="checkbox"
+                           name="{{ form.overall_atmospheres.name }}"
+                           value="{{ value }}">
+                    <label class="form-check-label">{{ text }}</label>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="row mb-3">
+    <h6 class="mb-4 mt-5">
+        Valeurs de l'entreprise<span class='text-muted ms-3'>(5
+    maximum)</span>
+</h6>
+<div class="col-md-3 mb-4 d-flex flex-row">
+    <div>
+        <a data-bs-toggle="modal"
+           data-bs-target="#values"
+           class='btn btn-danger text-center rounded-pill py-2 px-3'>Choisir les valeurs</a>
+    </div>
+</div>
+<div class="col-md-9 mb-4">
+    <div id='values_list' class='d-flex justify-content-left flex-wrap'>
+        {% for value in company_values %}
+            <div class="mx-2 mb-3 border rounded-pill py-2 px-3 d-flex"
+                 id="{{ value }}">
+                <span class='text-center'>{{ value }}</span>
+                <button type="button"
+                        onclick="remove_value(this)"
+                        value="{{ value }}"
+                        class="btn-close"
+                        aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+<div class="col-md-9 mb-3 ui-widget">
+    <label class="mb-2">Localisation de l'entreprise</label>
+    <input id='cities'
+           placeholder="Faites votre recherche..."
+           name="{{ form.company_locations.name }}"
+           class="form-group form-control">
+</div>
+<div class="col-md-3 mb-2">
+    <label class='mb-2' style="color: white;">a</label>
+</div>
+<div id="cities_list" class="d-flex flex-wrap">
+    {% for city in chosen_cities %}
+        <div class="mx-2 mb-3 border rounded-pill py-2 px-3 d-flex"
+             id="{{ city }}">
+            <span class='text-center'>{{ city }}</span>
+            <button type="button"
+                    onclick="remove_city('{{ city }}')"
+                    class="btn-close"
+                    aria-label="Close"></button>
+        </div>
+    {% endfor %}
+</div>
+<div class="mt-4 mb-5">
+    <label class="w-100 mb-2">Quelle niveau d encadrement je souhaite ?</label>
+    {% for error in autonomy.errors %}
+        <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+    {% endfor %}
+    {% for value, text in form.autonomy.field.choices %}
+        <div class="form-check form-check-inline">
+            <input {% if value in form.autonomy.value %}checked{% endif %}
+                   class="form-check-input"
+                   type="checkbox"
+                   name="{{ form.autonomy.name }}"
+                   value="{{ value }}">
+            <label class="form-check-label">{{ text }}</label>
+        </div>
+    {% endfor %}
+</div>
+<div class="mt-4 mb-5">
+    <label class="w-100 mb-2">Si l’entreprise me convient, je souhaite être embauché ( cdd/cdi) ?</label>
+    {% for error in hiring.errors %}
+        <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+    {% endfor %}
+    {% for value, text in form.hiring.field.choices %}
+        <div class="form-check form-check-inline">
+            <input {% if value in form.hiring.value %}checked{% endif %}
+                   class="form-check-input"
+                   type="radio"
+                   name="{{ form.hiring.name }}"
+                   value="{{ value }}">
+            <label class="form-check-label">{{ text }}</label>
+        </div>
+    {% endfor %}
+</div>
+{{ form.company_locations.as_hidden }}
+{{ form.company_values.as_hidden }}
+<div class="d-flex justify-content-between">
+    <a class="btn btn-danger rounded-pill my-4"
+       href="{% url 'students:mission' %}"
+       role="button">Etape précédente</a>
+    <button type="submit" class="btn btn-danger rounded-pill my-4" role="button">Fin inscription</button>
+</div>
+</form>
+<div class="modal fade"
+     id="values"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="values_title"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="values_title">Valeurs (5 maximum)</h5>
+            </div>
+            <div class="modal-body d-flex justify-content-left flex-wrap">
+                {% for value in all_values %}
+                    <a onclick="changeColor(this);add_value('{{ value }}');"
+                       value="{{ value }}"
+                       class="btn border rounded-pill my-3 mx-2 {% if value in chosen_values %}logo_color{% endif %}">{{ value }}
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button data-bs-dismiss="modal"
+                        type="button"
+                        class="btn btn-danger rounded-pill">Sauvegarder</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<script>
+    company_values = {{company_values | safe}}
+    chosen_cities = {{ chosen_cities | safe }}
+    cities = {{ cities | safe }}
+</script>
+{% endblock content %}

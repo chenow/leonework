@@ -1,0 +1,14 @@
+{% extends 'generic/base_generic.html' %}
+{% block content %}
+    <div class="row justify-content-lg-center mt-5">
+        <div class="col-lg-6 text-center">
+            Votre compte est désormais activé ! Vous pouvez désormais commencer votre inscription.
+        </div>
+        <div class="row d-flex justify-content-lg-center my-5">
+            <div class="d-flex justify-content-lg-center">
+                <a class="btn btn-danger bg-vermillon rounded-pill bold mt-5"
+                   href="{% url 'home:index' %}">Renseigner mon profil</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

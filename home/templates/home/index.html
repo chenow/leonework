@@ -1,0 +1,23 @@
+{% extends 'generic/base_generic.html' %}
+{% load static %}
+{% block content %}
+    <div class="row gx-4 gx-lg-5 align-items-center">
+        <div class="col-lg-6">
+            <h1 class="mb-5">
+                <span class="violine">Félicitations</span>, votre inscription est finie !
+            </h1>
+            <p>
+                Le processus de matching étudiant/professionel est en cours de développement. Nous mettrons sous peu en ligne une interface vous permettant de trouver et d'intérargir avec l'entreprise de vos rêves !
+            </p>
+            <div class="mt-5">
+                <a class="btn btn-danger bg-vermillon rounded-pill bold"
+                   href="{% url 'students:identity' %}">Modifier mes infos</a>
+            </div>
+        </div>
+        <div class="col-lg-6 d-flex justify-content-center">
+            <img src="{% static 'images/leonework/illustrations_leonework_4.png' %}"
+                 style='height: 70vh'
+                 class="img-fluid">
+        </div>
+    </div>
+{% endblock content %}

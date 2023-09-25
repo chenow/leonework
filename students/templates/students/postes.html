@@ -1,0 +1,58 @@
+{% extends 'generic/base_generic.html' %}
+{% load static %}
+{% block imports %}
+    <script src="{% static "students/postes.js" %}" defer></script>
+{% endblock imports %}
+{% block content %}
+    <label class="mb-2 mt-5">Je connais le métier que je cherche...</label>
+    <div class="input-group mb-3">
+        <input id='search_metiers'
+               type="text"
+               class="form-control"
+               placeholder=""
+               aria-label=""
+               aria-describedby="basic-addon1">
+        <div class="input-group-prepend">
+            <button onclick='search_metiers()' class="logo_color btn" type="button">chercher les métiers associés</button>
+        </div>
+    </div>
+    <div id="metiers_found"></div>
+    <label class="mb-2 mt-5">... Ou j'entre un domaine de travail...</label>
+    <input id='metiers'
+           type="text"
+           class="form-control"
+           style='margin-bottom: 150px'
+           placeholder=""
+           aria-label=""
+           aria-describedby="basic-addon1">
+    <label class="mb-2 mt-5">... Ou j'entre un grand domaine de travail</label>
+    <input id='domaines'
+           type="text"
+           class="form-control"
+           style='margin-bottom: 150px'
+           placeholder=""
+           aria-label=""
+           aria-describedby="basic-addon1">
+    <div class="d-flex justify-content-between">
+        <a class="btn btn-danger rounded-pill my-4"
+           href="{% url 'students:mission' %}"
+           role="button">ETAPE
+        PRECEDENTE</a>
+        <a type="submit"
+           href="{% url 'home:index' %}"
+           class="btn btn-danger bg-vermillon bold rounded-pill my-4"
+           role="button">ETAPE
+        SUIVANTE</a>
+    </div>
+    <script defer>
+    var metiers = new Array();
+    {{metiers | safe}}.forEach(item => {
+        metiers.push(item);
+    })
+
+    var domaines = new Array();
+    {{domaines | safe}}.forEach(item => {
+        domaines.push(item);
+    })
+    </script>
+{% endblock content %}

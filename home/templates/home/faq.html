@@ -1,0 +1,293 @@
+{% extends 'generic/base_generic.html' %}
+{% load static %}
+{% block content %}
+    <div class="row"></div>
+    <div class="row my-4">
+        <div class="col-12 text-center">
+            <h1>FAQ</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne"
+                                aria-expanded="false"
+                                aria-controls="collapseOne">Comment fonctionne votre plateforme ?</button>
+                    </h2>
+                    <div id="collapseOne"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="headingOne"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Notre plateforme de matchmaking pour les entreprises et les étudiants fonctionne de la manière suivante :
+                            Inscription : Les entreprises et les étudiants s'inscrivent sur notre plateforme en  créant un compte avec des informations de base telles que, adresse e-mail  et mot de passe.
+                            <br>
+                            <br>
+                            Création de profil : Les entreprises créent un profil détaillé de leur entreprise, y compris des informations sur leur secteur d'activité, leurs offres,   leurs exigences et leur culture d'entreprise. Les étudiants créent également leur profil, en fournissant des informations sur leur formation, leur expérience professionnelle, leurs intérêts, leurs valeurs.
+                            <br>
+                            <br>
+                            Matching : Notre algorithme de matchmaking utilise les informations fournies par les entreprises et les étudiants pour trouver des correspondances appropriées en fonction de leurs critères de sélection et de leurs préférences. Les entreprises peuvent alors consulter les profils des étudiants qui correspondent à leurs critères de recherche et vice versa.
+                            <br>
+                            <br>
+                            Like : Les étudiants peuvent parcourir les profils des entreprises et indiquer leur intérêt en utilisant le bouton ❤️ "like". De même, les entreprises peuvent parcourir les profils des étudiants et utiliser le bouton ❤️ "like" pour indiquer leur intérêt.
+                            <br>
+                            <br>
+                            Lorsqu'un étudiant et une entreprise s'intéressent mutuellement, c'est-à-dire lorsqu'il y a un "match", ils peuvent alors accéder à une messagerie interne pour échanger des messages et en apprendre davantage sur leurs intérêts et leurs attentes.
+                            <br>
+                            <br>
+                            En bref, les "likes" sont utilisés pour montrer de l'intérêt pour un profil et les "matchs" se produisent lorsque cet intérêt est mutuel, ce qui permet aux parties concernées de commencer à communiquer et à explorer les opportunités de collaboration.
+                            <br>
+                            <br>
+                            Communication : Les entreprises peuvent initier une conversation avec les étudiants qui ont suscité leur intérêt en utilisant notre messagerie interne sécurisée. Les étudiants peuvent également contacter les entreprises qui les intéressent.
+                            <br>
+                            <br>
+                            Suivi : Nous offrons un suivi et une assistance tout au long du processus de recherche  pour assurer la réussite des étudiants et la satisfaction des entreprises.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading11">
+                        <button class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse11"
+                                aria-expanded="false"
+                                aria-controls="collapse11">
+                            Comment puis-je m'inscrire en tant qu'étudiant/entreprise sur votre plateforme ?
+                        </button>
+                    </h2>
+                    <div id="collapse11"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="heading11"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Cliquez sur le bouton "Inscription" pour créer un compte. Vous serez invité à remplir un formulaire d'inscription avec mail et mot de passe. Une fois que vous avez soumis vos informations, vous recevrez un e-mail de confirmation avec un lien pour vérifier votre compte. Après avoir vérifié votre compte, choisissez si vous êtes un étudiant ou une entreprise et commencez votre inscription en suivant les étapes. Une fois terminé, vous  pourrez vous connecter à la plateforme et commencer à utiliser nos services.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree"
+                                aria-expanded="false"
+                                aria-controls="collapseThree">
+                            Est-ce que votre plateforme offre uniquement des alternances et des stages ?
+                        </button>
+                    </h2>
+                    <div id="collapseThree"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="headingThree"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Oui, notre plateforme est spécialisée dans la recherche d' entreprise pour une alternance ou un stage et vice versa.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse4"
+                                aria-expanded="false"
+                                aria-controls="collapse4">
+                            Comment puis-je contacter l'équipe de support si j'ai des problèmes ou des questions ?
+                        </button>
+                    </h2>
+                    <div id="collapse4"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="headingThree"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Des pages de contact sont disponibles dans le site, nous vous rappelons notre mail et téléphone :
+                            <br>
+                            <br>
+                            audrey@leonework.com
+                            <br>
+                            tel :  06 59 78 64 61
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading5">
+                        <button class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse5"
+                                aria-expanded="false"
+                                aria-controls="collapse5">
+                            Comment puis-je annuler mon abonnement à la plateforme ?
+                        </button>
+                    </h2>
+                    <div id="collapse5"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="heading5"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Les étudiants ne payent pas.
+                            <br>
+                            <br>
+                            Pour les entreprises les  forfaits à la carte et intermédiaire ne sont pas sous forme d’ abonnement. Concernant l’offre illimité vous pouvez arrêter votre abonnement sans échéance particulière par mail audrey@leonework.com
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading12">
+                        <button class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse12"
+                                aria-expanded="false"
+                                aria-controls="collapse12">
+                            Comment puis-je modifier mes préférences de match-making
+                        </button>
+                    </h2>
+                    <div id="collapse12"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="heading12"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Connectez-vous à votre compte sur la plateforme.
+                            <br>
+                            <br>
+                            Rendez-vous sur mes entreprises ou mes candidats dans votre profil.
+                            <br>
+                            <br>
+                            Cliquez sur modifier ma recherche
+                            <br>
+                            <br>
+                            Modifiez les critères de sélection que vous souhaitez
+                            <br>
+                            <br>
+                            Vous pouvez aussi trier avec  les filtres sur la même page. Une fois vos préférences de matchmaking modifiées, notre algorithme de matching prendra en compte ces nouveaux critères pour vous proposer des profils d'entreprises correspondant davantage à vos attentes.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading6">
+                        <button class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse6"
+                                aria-expanded="false"
+                                aria-controls="collapse6">
+                            Comment puis-je supprimer mon compte de la plateforme ?
+                        </button>
+                    </h2>
+                    <div id="collapse6"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="heading6"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">Cliquez sur supprimer mon compte dans le menu déroulant</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading7">
+                        <button class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse7"
+                                aria-expanded="false"
+                                aria-controls="collapse7">
+                            Comment puis-je signaler un comportement inapproprié sur la plateforme ?
+                        </button>
+                    </h2>
+                    <div id="collapse7"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="heading7"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Pour tout comportement inapproprié contactez nous sur cette adresse : audrey@leonework.com
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading8">
+                        <button class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse8"
+                                aria-expanded="false"
+                                aria-controls="collapse8">
+                            Comment puis-je mettre à jour mes informations personnelles sur la plateforme ?
+                        </button>
+                    </h2>
+                    <div id="collapse8"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="heading8"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">Connectez vous à votre compte et rendez vous dans mes infos</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading9">
+                        <button class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse9"
+                                aria-expanded="false"
+                                aria-controls="collapse9">
+                            Je n’ai pas d’étudiants / d’entreprises qui s’affichent, que faire ?
+                        </button>
+                    </h2>
+                    <div id="collapse9"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="heading9"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Il n'y a peut-être pas d'entreprises / d’étudiants  correspondant à vos critères de recherche actuels.
+                            <br>
+                            <br>
+                            Pour le forfait illimité, nous cherchons avec vous en cas de besoin dans nos écoles partenaires.
+                            <br>
+                            <br>
+                            Si vous rencontrez des problèmes pour trouver des entreprises / étudiants  sur la plateforme, nous vous recommandons de vérifier vos critères de recherche. Nous utilisons des filtres afin de vous proposer des profils qui vous correspondent. Si le problème persiste, n'hésitez pas à contacter notre équipe d'assistance pour obtenir de l'aide.
+                            <br>
+                            <br>
+                            audrey@leonework.com
+                            <br>
+                            06 59 78 64 61
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading10">
+                        <button class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse10"
+                                aria-expanded="false"
+                                aria-controls="collapse10">
+                            Vous n’avez pas trouvé votre réponse dans cette liste ?
+                        </button>
+                    </h2>
+                    <div id="collapse10"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="heading10"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Contactez nous
+                            <br>
+                            <br>
+                            audrey@leonework.com
+                            <br>
+                            06 59 78 64 61
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 text-center mt-5">
+            <a class="btn btn-outline-danger rounded-pill"
+               href="{% url 'home:support' %}">Vous voulez poser une
+            question ? Utilisez la page Aide &amp; Support</a>
+        </div>
+    </div>
+{% endblock content %}

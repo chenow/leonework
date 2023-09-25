@@ -1,0 +1,62 @@
+{% extends 'generic/base_generic.html' %}
+{% load static %}
+{% block imports %}
+    <script type="text/javascript"
+            src="{% static 'students/change_research_entreprise.js' %}"
+            defer></script>
+{% endblock imports %}
+{% block content %}
+    <form novalidate
+          class="needs-validation row mt-5 d-flex justify-content-center"
+          action="{% url 'students:change_research_entreprise' %}"
+          method="post">
+        <h3 class="mb-3 violine text-center">
+            <b>Mon entreprise idéale</b>
+        </h3>
+        {% csrf_token %} {{ form }}
+        <div class="d-flex justify-content-between">
+            <a class="btn btn-danger rounded-pill my-4"
+               href="{% url 'students:change_research_mission' %}"
+               role="button">Etape précédente</a>
+            <button type="submit" class="btn btn-danger rounded-pill my-4" role="button">Fin inscription</button>
+        </div>
+    </form>
+    <div class="modal fade"
+         id="valeurs"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="valeurs_title"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="valeurs_title">Valeurs (5 maximum)</h5>
+                </div>
+                <div class="modal-body d-flex justify-content-left flex-wrap">
+                    {% for valeur in valeurs %}
+                        <a onclick="changeColor(this);"
+                           valeur="{{ valeur.valeur }}"
+                           class="btn border rounded-pill my-3 mx-2 {% if valeur.valeur in chosen_valeurs %}logo_color{% endif %}">{{ valeur.valeur }}
+                        </a>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button onclick="save_valeurs()"
+                            data-bs-dismiss="modal"
+                            type="button"
+                            class="btn btn-danger rounded-pill">Sauvegarder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var valeurs = new Array();
+        var cities = new Array();
+        var chosen_cities = new Array();
+    </script>
+    {% for city in cities %}
+        <script>cities.push("{{ city.city }}");</script>
+    {% endfor %}
+    {% for city in chosen_cities %}<script>chosen_cities.push("{{ city }}");</script>{% endfor %}
+    {% for valeur in chosen_valeurs %}<script>valeurs.push("{{ valeur }}");</script>{% endfor %}
+{% endblock content %}

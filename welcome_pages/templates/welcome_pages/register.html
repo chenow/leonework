@@ -1,0 +1,44 @@
+{% extends "generic/base_generic.html" %}
+{% load bootstrap5 %}
+{% block content %}
+    <div class='row py-5'>
+        <h1 class='text-center'>Je crée mon compte</h1>
+    </div>
+    <div class="row justify-content-lg-center">
+        <div class="col-lg-4">
+            <form novalidate
+                  action="/register/"
+                  method="post"
+                  class='d-flex justify-content-center flex-column'>
+                {% csrf_token %}
+                {% bootstrap_field form.email %}
+                {% bootstrap_field form.password %}
+                <div>
+                    <input type="checkbox" class="m-3" onclick="myFunction()">
+                    Afficher le mot de passe
+                </div>
+                <div class='text-muted'>
+                    En créant un compte ou en vous connectant, vous comprenez et acceptez les <a href="{% url 'welcome_pages:cgu' %}">conditions d'utilisation</a> de LEONEWORK. Vous confirmez également avoir pris connaissance de notre <a href="{% url 'welcome_pages:confidentialite' %}">politique de confidentialité</a>.
+                </div>
+                <button type="submit" class="btn btn-danger rounded-pill my-4">Je crée mon compte</button>
+            </form>
+        </div>
+        <div class="row d-flex justify-content-lg-center my-5">
+            <div class="d-flex justify-content-lg-center">
+                Vous avez déja un compte ? <a class='px-2' href="{% url 'welcome_pages:login' %}">Connectez-vous</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block script %}
+    <script defer>
+          function myFunction() {
+            var x = document.getElementById("id_password");
+            if (x.type === "password") {
+              x.type = "text";
+            } else {
+              x.type = "password";
+            }
+          }
+    </script>
+{% endblock script %}

@@ -1,0 +1,24 @@
+#django librairies
+psycopg2-binary
+django
+django-static-jquery3
+django-static-jquery-ui
+django-cors-headers
+django-bootstrap-v5
+django-static-jquery
+django-debug-toolbar
+django-phonenumbers
+django-phonenumber-field
+django-cleanup
+Pillow
+
+# utilities
+python-dotenv
+django-environ
+pandas
+stripe
+
+# linting
+mypy
+black
+djlint # for templates

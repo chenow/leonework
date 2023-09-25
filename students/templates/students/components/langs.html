@@ -1,0 +1,25 @@
+{% for lang, level in langs %}
+    <div id="chosen_{{ lang }}"
+         class="mx-2 mb-3 container-fluid border rounded-pill py-2 px-3">
+        <div class="row">
+            <div class="col-11">
+                <span class='text-center violine'><b>{{ lang }}</b></span>
+                <select onchange='add_language_level("{{ lang }}", this.options[this.selectedIndex].value)'
+                        class="form-select"
+                        aria-label="Niveau de langue">
+                    <option value="debutant" {% if level == 'debutant' %}selected{% endif %}>Débutant</option>
+                    <option value="intermediaire"
+                            {% if level == 'intermediaire' %}selected{% endif %}>Intermédiaire</option>
+                    <option value="avancee" {% if level == 'avancee' %}selected{% endif %}>Avancé</option>
+                    <option value="bilingue" {% if level == 'bilingue' %}selected{% endif %}>Bilingue</option>
+                </select>
+            </div>
+            <div class="col-1 align-items-center">
+                <button type="button"
+                        onclick="remove_lang('{{ lang }}')"
+                        class="btn-close"
+                        aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+{% endfor %}

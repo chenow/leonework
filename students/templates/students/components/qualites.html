@@ -1,0 +1,9 @@
+{% for qualite in qualities %}
+    <div class="mx-2 mb-3 border rounded-pill py-2 px-3 d-flex">
+        <span class='text-center me-2'>{{ qualite | safe }}</span>
+        <button type="button"
+                onclick='changeColorQualite($(`[qualite="{{ qualite }}"]`)[0]);'
+                class="btn-close"
+                aria-label="Close"></button>
+    </div>
+{% endfor %}

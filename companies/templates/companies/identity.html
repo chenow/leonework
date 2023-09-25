@@ -1,0 +1,61 @@
+{% extends "generic/base_generic.html" %}
+{% load bootstrap5 %}
+{% load static %}
+{% block imports %}
+    <script type="text/javascript"
+            src="{% static 'companies/identity.js' %}"
+            defer></script>
+{% endblock imports %}
+{% block content %}
+    <h3 class="mb-3 mt-4 violine text-center">
+        <b>Identité de l'entreprise</b>
+    </h3>
+    <form novalidate
+          action="{% url 'companies:identity' %}"
+          class="needs-validation row mt-5 d-flex justify-content-center"
+          method="post"
+          enctype="multipart/form-data">
+        <div class="col-md-1"></div>
+        {% csrf_token %}
+        <div class="col-md-5 ui-widget">
+            {% bootstrap_form form label_class='bold' exclude='photo,city,postal_code' %}
+            <div class="row">
+                <div class="col-lg-4">{% bootstrap_field form.postal_code label_class='bold' %}</div>
+                <div class="col-lg-8">{% bootstrap_field form.city label_class='bold' %}</div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <h6 class="d-flex justify-content-center align-items-center my-3">
+                <span class="text-center"><b>Logo de votre entreprise ou photo de profil</b></span>
+                <input type="checkbox" name="photo-clear" id="photo-clear_id" hidden>
+                <br />
+                <div class="col-md-1"></div>
+            </h6>
+            <div class="position-relative mt-2 mb-4">
+                <img style="height: 150px;
+                            width: auto"
+                     {% if user.company.photo %} src="{{ user.company.photo.url }}" {% else %} src="https://via.placeholder.com/150" {% endif %}
+                     alt="Logo de votre entreprise ou photo de profil"
+                     id="photo_profil"
+                     class="position-relative top-0 start-50 translate-middle-x rounded-pill border border-dark" />
+            </div>
+            <div class="ps-2 mb-3 center-items">
+                <label for="formFileSm" class="form-label">Format PNG ou JPEG, 500 kB max...</label>
+                <input name="{{ form.photo.name }}"
+                       id="photo_input"
+                       accept="image/png, image/jpeg"
+                       class="form-control form-control-sm"
+                       type="file" />
+                <a id="clear" href='#' onclick='clearInput();'>Supprimer ma photo</a>
+                <br />
+                {% for error in form.photo.errors %}
+                    <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+            <button type="submit" class="btn btn-danger rounded-pill my-4" role="button">Etape suivante</button>
+        </div>
+    </form>
+{% endblock content %}

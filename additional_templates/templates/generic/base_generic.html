@@ -1,0 +1,214 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>Leonework</title>
+        <meta name="title" content="Leonework">
+        <meta name="description"
+              content="Leonework : Plateforme de recrutement pour alternants, stagiaires, apprentis">
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        <link rel="stylesheet" href="{% static 'css/generic.css' %}">
+        <link rel="stylesheet" href="{% static "jquery-ui/jquery-ui.min.css" %}" />
+        <script src="{% static "jquery-ui/external/jquery/jquery.js" %}"></script>
+        <script src="{% static "jquery-ui/jquery-ui.min.js" %}"></script>
+        <script src="{% static "jquery/plugins/jquery.cookie.js" %}" defer></script>
+        <script src="{% static "js/axios.min.js" %}" defer></script>
+        <script src="{% static "js/generic.js" %}" defer></script>
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+                defer></script>
+        <script src="https://unpkg.com/htmx.org@1.9.2"
+                integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h"
+                crossorigin="anonymous"
+                defer></script>
+        {% block imports %}
+        {% endblock imports %}
+    </head>
+    <body id="body">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top p-0 shadow">
+            <div class="container-fluid bg-cobalt">
+                <a class="navbar-brand" href="{% url 'home:index' %}">
+                    <img src="{% static 'images/logo-leonework.jpg' %}"
+                         class="d-lg-inline d-md-none d-sm-none d-none">
+                    <img src="{% static 'images/favicon.ico' %}"
+                         width="48px"
+                         class="d-lg-none">
+                </a>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        {% block navbar_links %}
+                            {% if user.finished_inscription %}
+                                {% if user.company_or_student == "student" %}
+                                    <li class="nav-item">
+                                        <a class="nav-link px-2" href="{% url 'home:change_search' %}">Mes infos</a>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item">
+                                        <a class="nav-link px-2" href="{% url 'companies:researches' %}">Mes recherches</a>
+                                    </li>
+                                {% endif %}
+                                <li class="nav-item">
+                                    <a class="nav-link px-2" href="{% url 'home:index' %}">Mes
+                                        {% if user.company_or_student == "student" %}
+                                            entreprises
+                                        {% else %}
+                                            candidats
+                                        {% endif %}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-2" href="{% url 'home:likes' %}">Mes likes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-2" href="{% url 'home:matches' %}">Mes matchs</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link ps-2 pe-4" href="{% url 'home:messages' %}">Mes messages</a>
+                                </li>
+                                <div class="vr text-white"></div>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle"
+                                       href="#"
+                                       id="navbarDropdown"
+                                       role="button"
+                                       data-bs-toggle="dropdown"
+                                       aria-expanded="false">Mon compte</a>
+                                    <ul class="dropdown-menu dropdown-menu-end"
+                                        aria-labelledby="navbarDropdown">
+                                        {% if user.is_superuser %}
+                                            <li>
+                                                <a class="dropdown-item" href="/administration/">Admin</a>
+                                            </li>
+                                        {% endif %}
+                                        <li>
+                                            <a class="dropdown-item" href="{% url 'welcome_pages:presentation' %}">Accueil</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{% url 'home:identity' %}">Mes infos</a>
+                                        </li>
+                                        {% if user.company_or_student == "company" and user.company.stripe_id %}
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'payment:compte' %}">Mes paiements</a>
+                                            </li>
+                                        {% endif %}
+                                        <li>
+                                            <a class="dropdown-item" href="{% url 'welcome_pages:delete_account' %}">Supression compte</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{% url 'home:faq' %}">FAQ</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{% url 'home:support' %}">Contact</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{% url 'welcome_pages:logout' %}">Déconnexion</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            {% else %}
+                                <li class="nav-item me-2 mb-2">
+                                    <a class="btn btn-danger bg-vermillon rounded-pill bold"
+                                       href="{% url 'welcome_pages:register' %}">Inscription</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-danger rounded-pill bold text-white"
+                                       href="{% url 'welcome_pages:login' %}">Connexion</a>
+                                </li>
+                            {% endif %}
+                        {% endblock navbar_links %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id='content'
+             class="container-fluid bg-white pb-5"
+             style="width: 100vw !important;
+                    {% block bg_color %}{% endblock bg_color %}">
+            <div class="row spacer"></div>
+            <div class="row">
+                <div class="col-md-12 alert-container-fluid">{% bootstrap_messages %}</div>
+            </div>
+            {% block content %}
+            {% endblock content %}
+        </div>
+        <div id="sep"></div>
+        <div style="height: 60px;
+                    background-color: rgba(230, 245, 225, 0.2)!important"></div>
+        <footer class="bg-gray"
+                style="background-color: rgba(230, 245, 225, 0.2)!important">
+            <div class="container-fluid">
+                <div class="row"></div>
+                <div class="row m-3">
+                    <div class="col-lg-6">
+                        <a href="{% url 'home:index' %}">
+                            <img src="{% static 'images/logo-leonework-white.jpg' %}"
+                                 style="margin-left: -18px"
+                                 class="shadow-sm">
+                        </a>
+                    </div>
+                    <div class="col-lg-6 text-lg-end mt-4"></div>
+                </div>
+                <div class="row m-3">
+                    <div class="col-lg-12 bg-cobalt separateur"></div>
+                </div>
+                <div class="row m-3">
+                    <div class="col-lg-6 mb-2">
+                        <a class="text-black me-2"
+                           href="{% url 'welcome_pages:mentions_legales' %}">Mentions légales</a>
+                        <a class="text-black me-2" href="{% url 'welcome_pages:cookies' %}">Cookies</a>
+                        <a class="text-black p-2"
+                           href="{% url 'welcome_pages:confidentialite' %}">Politique de
+                        confidentialité</a>
+                        <a class="text-black p-2" href="{% url 'welcome_pages:cgv' %}">CGV</a>
+                        <a class="text-black p-2" href="{% url 'welcome_pages:cgu' %}">CGU</a>
+                    </div>
+                    <div class="col-lg-6 text-lg-end mb-2">Copyright © 2023 - Leonework</div>
+                </div>
+                <div class="container">
+                    <!-- Section: Social media -->
+                    <section class="mb-4 d-flex justify-content-center">
+                        <!-- Facebook -->
+                        <a class="btn btn-link btn-floating btn-lg text-dark m-1"
+                           href="https://www.facebook.com/profile.php?id=100086904281208"
+                           role="button"
+                           data-mdb-ripple-color="dark"><i class="bi bi-facebook"></i></a>
+                        <!-- Twitter -->
+                        <a class="btn btn-link btn-floating btn-lg text-dark m-1"
+                           href="https://www.tiktok.com/@leonework"
+                           role="button"
+                           data-mdb-ripple-color="dark"><i class="bi bi-tiktok"></i></a>
+                        <!-- Instagram -->
+                        <a class="btn btn-link btn-floating btn-lg text-dark m-1"
+                           href="https://instagram.com/leonework"
+                           role="button"
+                           data-mdb-ripple-color="dark"><i class="bi bi-instagram"></i></a>
+                        <!-- Linkedin -->
+                        <a class="btn btn-link btn-floating btn-lg text-dark m-1"
+                           href="https://www.linkedin.com/company/leonework-alternance/"
+                           role="button"
+                           data-mdb-ripple-color="dark"><i class="bi bi-linkedin"></i></a>
+                    </section>
+                    <!-- Section: Social media -->
+                </div>
+            </div>
+        </footer>
+    </body>
+    {% block script %}
+    {% endblock script %}
+</html>

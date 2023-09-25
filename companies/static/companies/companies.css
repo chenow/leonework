@@ -1,0 +1,28 @@
+.heart {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-65%, -50%);
+    background: url(/static/images/like_animation.png) no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+}
+
+.like_animation {
+    animation: fave-heart 1s steps(28);
+}
+
+.liked {
+    background: url(/static/images/liked.png);
+}
+
+@keyframes fave-heart {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -2800px 0;
+    }
+}

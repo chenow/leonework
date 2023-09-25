@@ -1,0 +1,75 @@
+{% extends 'generic/base_generic.html' %}
+{% load static %}
+{% block imports %}
+    <script type="text/javascript"
+            src="{% static 'students/students.js' %}"
+            defer></script>
+    <script type="text/javascript" src="{% static 'students/likes.js' %}" defer></script>
+    <link rel="stylesheet" href="{% static 'students/students.css' %}" />
+{% endblock imports %}
+{% block content %}
+    <h4 class="mt-5 violine text-center">
+        <b>Ces entreprises vous ont liké !</b>
+    </h4>
+    <h6 class="mb-5 text-center">Si vous appreciez leurs profils, likez-les en retour pour pouvoir échanger avec eux.</h6>
+    <hr class="hr" />
+    <div style="width: 50%; margin: auto; min-width: 300px">
+        <div id="carouselEntControls"
+             class="carousel slide d-fl"
+             data-bs-ride="carousel">
+            <div class="carousel-inner"
+                 id="likes_ent"
+                 style="width:80%;
+                        min-height: 300px;
+                        margin: 0 10%"></div>
+            <button class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouseEntControls"
+                    data-bs-slide="prev">
+                <i style="color: black; font-size: 2rem" class="bi bi-arrow-left-square"></i>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouseEntControls"
+                    data-bs-slide="next">
+                <i style="color: black;
+                          font-size: 2rem"
+                   class="bi bi-arrow-right-square"></i>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <h4 class="mt-5 violine text-center">
+        <b>Vous avez liké leurs profils.</b>
+    </h4>
+    <h6 class="mb-5 text-center">Attendez qu'ils se prononcent pour pouvoir les contacter.</h6>
+    <hr class="hr" />
+    <div style="width: 50%; margin: auto; min-width: 300px">
+        <div id="carouselExampleControls"
+             class="carousel slide d-fl"
+             data-bs-ride="carousel">
+            <div class="carousel-inner"
+                 id="likes"
+                 style="width:80%;
+                        margin: 0 10%;
+                        min-height: 300px"></div>
+            <button class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                <i style="color: black; font-size: 2rem" class="bi bi-arrow-left-square"></i>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                <i style="color: black;
+                          font-size: 2rem"
+                   class="bi bi-arrow-right-square"></i>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+{% endblock content %}

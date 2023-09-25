@@ -1,0 +1,105 @@
+{% extends 'generic/base_generic.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% block imports %}
+    <script type="text/javascript"
+            src="{% static 'companies/mission.js' %}"
+            defer></script>
+{% endblock imports %}
+{% block content %}
+    <form novalidate
+          action="{% url 'companies:mission' %}"
+          class="needs-validation row mt-5 d-flex justify-content-center"
+          method="post">
+        <div class="col-md-1"></div>
+        {% csrf_token %}
+        <div class="col-md-10">
+            <h3 class="mb-3 violine text-center">
+                <b>Mission proposée</b>
+            </h3>
+            <div class="row">
+                <div class="col-md-6 px-4">
+                    {% bootstrap_field form.contract_type label_class='bold mb-3' %}
+                    {% bootstrap_label form.minimal_degree.label label_class='bold mb-2' %}
+                    <br />
+                    <div class="text-muted mb-2">Tous les étudiants des niveaux similaires et supérieurs ressortiront.</div>
+                    {% bootstrap_field form.minimal_degree show_label='skip' label_class='bold mb-3' %}
+                    <div class="row">
+                        <div class="col-lg-6">{% bootstrap_field form.beginning_date label_class='bold mb-2' %}</div>
+                        <div class="col-lg-6">{% bootstrap_field form.ending_date label_class='bold mb-2' %}</div>
+                        <div class="text-muted mb-3">Nous vous présenterons les étudiants avec 3 mois de flexibilité</div>
+                    </div>
+                </div>
+                <div class="col-md-6 px-4">
+                    <label class="bold mb-1">Poste proposé</label>
+                    <a class="px-2"
+                       href="#"
+                       data-bs-toggle="modal"
+                       data-bs-target="#exampleModal">Je ne trouve pas mon poste ?</a>
+                    <br />
+                    <p class="text-muted mb-3">
+                        Choisissez un poste, les domaines associés à ceux ci sont
+                        automatiques, vous pourrez choisir les élèves par poste ou par domaine
+                        d’activité.
+                    </p>
+                    {% bootstrap_field form.proposed_job label_class='bold mb-3' show_label='skip' %}
+                    {% bootstrap_field form.job_description label_class='bold mb-3' %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">{% bootstrap_field form.teleworking label_class='bold mb-3' %}</div>
+                <div class="col-lg-6">{% bootstrap_field form.hiring label_class='bold mb-3' %}</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">{% bootstrap_field form.work_weekend label_class='bold mb-3' %}</div>
+                <div class="col-lg-6">
+                    <label class="bold mb-1">Lieu de la mission</label>
+                    <br />
+                    <p class="text-muted mb-3">
+                        Si la mission se déroule sur une petite localité merci de renseigner la grande city la plus proche.
+                    </p>
+                    {% bootstrap_field form.job_location label_class='bold mb-3' show_label='skip' %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="d-flex justify-content-between">
+            <a class="btn btn-danger rounded-pill my-4"
+               href="{% url 'companies:company' %}"
+               role="button">Etape précédente</a>
+            <button type="submit" class="btn btn-danger rounded-pill my-4" role="button">Etape suivante</button>
+        </div>
+    </form>
+    <div class="modal fade"
+         id="exampleModal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form novalidate
+                      method="post"
+                      action="{% url 'companies:mailMissingPoste' %}">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Demande de rajout de poste</h5>
+                        <button type="button"
+                                class="btn-close"
+                                data-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {% bootstrap_form form_mail %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-danger">Envoyer un mail</button>
+                    </div>
+                {% endblock content %}
+                {% block script %}
+                    <script defer type="text/javascript">
+                        professions = {{professions | safe}}
+                        cities = {{cities | safe}}
+                    </script>
+                {% endblock script %}

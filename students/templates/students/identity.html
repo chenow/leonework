@@ -1,0 +1,80 @@
+{% extends 'generic/base_generic.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% block imports %}
+    <script type="text/javascript"
+            src="{% static 'students/identity.js' %}"
+            defer></script>
+{% endblock imports %}
+{% block content %}
+    <div class="mt-5"></div>
+    <form method='post'
+          novalidate
+          class="row mt-5 d-flex justify-content-center"
+          action="{% url 'students:identity' %}"
+          enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="col-md-8">
+            <h3 class="mb-3 violine text-center">
+                <b>Mon Identité</b>
+            </h3>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        {% bootstrap_field form.first_name %}
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        {% bootstrap_field form.last_name %}
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        {% bootstrap_field form.phone_number %}
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        {% bootstrap_field form.birthdate %}
+                        <div class="col-md-2"></div>
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4 class="d-flex justify-content-center align-items-center my-3">
+                <span class="text-center"><b>Photo de profil</b></span>
+            </h4>
+            <input type="checkbox" name="photo-clear" id="photo-clear_id" hidden>
+            <div class='position-relative mt-2 mb-4'>
+                <img style='height: 150px;
+                            width: auto'
+                     {% if user.student.photo %} src="{{ user.student.photo.url }}" {% else %} src="https://via.placeholder.com/150" {% endif %}
+                     alt="photo de profil"
+                     id="photo_profil"
+                     class="position-relative top-0 start-50 translate-middle-x rounded-pill border border-dark">
+            </div>
+            <div class="ps-2 mb-2 center-items">
+                <label for="formFileSm" class="form-label">Format PNG ou JPEG, 500 kB max...</label>
+                <input id='photo_input'
+                       name="{{ form.photo.name }}"
+                       accept="image/png, image/jpeg"
+                       class="form-control form-control-sm"
+                       type="file"
+                       placeholder='a'>
+                <a id="clear" href='#' onclick='clearInput();'>Supprimer ma photo</a>
+                <br />
+                {% for error in form.photo.errors %}
+                    <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+            <button type="submit" class="btn btn-danger rounded-pill my-4" role="button">Etape suivante</button>
+        </div>
+    </form>
+{% endblock content %}

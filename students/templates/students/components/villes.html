@@ -1,0 +1,11 @@
+{% for city in cities %}
+    <div>
+        <div class="mx-2 mb-3 border rounded-pill py-2 px-3 d-flex">
+            <span class='text-center me-2'>{{ city }}</span>
+            <button type="button"
+                    onclick="remove_ville('{{ city }}')"
+                    class="btn-close"
+                    aria-label="Close"></button>
+        </div>
+    </div>
+{% endfor %}

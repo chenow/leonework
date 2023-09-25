@@ -1,0 +1,213 @@
+{% extends 'generic/base_generic.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% block imports %}
+    <script type="text/javascript"
+            src="{% static 'students/mission.js' %}?3"
+            defer></script>
+{% endblock imports %}
+{% block content %}
+    <form novalidate
+          class="needs-validation row mt-5 px-4 d-flex justify-content-center"
+          action="{% url 'students:mission' %}"
+          method="post">
+        <h3 class="violine text-center mb-5">
+            <b>La mission que je cherche</b>
+        </h3>
+        {% csrf_token %}
+        <div class="col-md-2"></div>
+        <div class="col-md-8 mb-5">
+            <div class="row mb-5">
+                <label class='mb-2'>Type de contrat</label>
+                {% for error in form.contract_type.errors %}
+                    <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+                {% endfor %}
+                <select name="{{ form.contract_type.name }}" class="form-group form-select">
+                    {% for value, text in form.contract_type.field.choices %}
+                        <option style="width: 100px"
+                                {% if value == form.contract_type.value %}selected{% endif %}
+                                value="{{ value }}">{{ text }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row mb-4">
+                <div class="text-muted mb-3">Nous vous afficherons les entreprises avec 3 mois de flexibilité</div>
+                <div class="col-sm-6 mb-3">
+                    <label class='mb-2'>Date de début</label>
+                    {% for error in form.beginning_date.errors %}
+                        <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+                    {% endfor %}
+                    <input name="{{ form.beginning_date.name }}"
+                           id="datepicker"
+                           type="text"
+                           class="form-control"
+                           value="{{ form.beginning_date.value | date:'d/m/Y' | default:'' }}">
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <label class='mb-2'>Date de fin</label>
+                    {% for error in form.ending_date.errors %}
+                        <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+                    {% endfor %}
+                    <input name="{{ form.ending_date.name }}"
+                           id="datepicker2"
+                           type="text"
+                           class="form-control"
+                           value="{{ form.ending_date.value | date:'d/m/Y' | default:'' }}">
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-sm-6 mb-3">
+                    <label class="w-100 mb-2">Souhaitez-vous faire du télétravail ?</label>
+                    {% for error in form.teleworking.errors %}
+                        <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+                    {% endfor %}
+                    {% for value, text in form.teleworking.field.choices %}
+                        <div class="form-check form-check-inline">
+                            <input {% if value == form.teleworking.value %}checked{% endif %}
+                                   class="form-check-input"
+                                   type="radio"
+                                   name="{{ form.teleworking.name }}"
+                                   value="{{ value }}">
+                            <label class="form-check-label">{{ text }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <label class="w-100 mb-2">Je peux travailler le weekend ?</label>
+                    {% for error in form.work_weekend.errors %}
+                        <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+                    {% endfor %}
+                    {% for value, text in form.work_weekend.field.choices %}
+                        <div class="form-check form-check-inline mb-1">
+                            <input {% if value == form.work_weekend.value %}checked{% endif %}
+                                   class="form-check-input"
+                                   type="radio"
+                                   name="{{ form.work_weekend.name }}"
+                                   value="{{ value }}">
+                            <label class="form-check-label">{{ text }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row mb-5">
+                <label class='mb-2'>
+                    Rythme de l'alternance<span class='text-muted ms-3'>Optionnel, ne pas remplir si non concerné</span>
+                </label>
+                {% for error in form.apprenticeship_rate.errors %}
+                    <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+                {% endfor %}
+                <input name="{{ form.apprenticeship_rate.name }}"
+                       type="text"
+                       class="form-control"
+                       value="{{ form.apprenticeship_rate.value | default:'' }}"
+                       placeholder="1 semaine école/3 semaines entreprise">
+            </div>
+            <div class="row ui-widget mb-5">
+                <div class="card px-0">
+                    <div class="card-header bg-light px-2">
+                        <label class='mb-2'>
+                            <b>Métiers recherchés</b>
+                        </label>
+                        <a class="px-2"
+                           href="#"
+                           data-bs-toggle="modal"
+                           data-bs-target="#mail_metier">Je ne trouve pas le métier que je cherche ?</a>
+                        <br>
+                        <span>Si vous n'avez pas d'idées de métier, vous pouvez entrer un domaine plus bas.</span>
+                        {% for error in form.demanded_jobs.errors %}
+                            <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+                        {% endfor %}
+                        <input id='jobs'
+                               placeholder="Faites votre recherche..."
+                               class="form-group mb-2 form-control">
+                    </div>
+                    <ul id='demanded_jobs' class="list-group list-group-flush">
+                        {% for job in demanded_jobs %}
+                            <li class="list-group-item d-flex align-items-center" id="{{ job }}">
+                                {{ job }}
+                                <button type="button"
+                                        job="{{ job }}"
+                                        onclick="remove_job(this.getAttribute('job'))"
+                                        class="btn-close ms-2"
+                                        aria-label="Close"></button>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row ui-widget mb-5">
+                <div class="card px-0">
+                    <div class="card-header bg-light px-2">
+                        <label class='mb-2'>
+                            <b>Domaines recherchés</b>
+                        </label>
+                        <span class='ps-3 text-muted'>(optionnel)</span>
+                        {% for error in form.demanded_domains.errors %}
+                            <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+                        {% endfor %}
+                        <input id='domains'
+                               placeholder="Faites votre recherche..."
+                               class="form-group mb-2 form-control">
+                    </div>
+                    <ul id='domains_chosen' class="list-group list-group-flush">
+                        {% for domain in demanded_domains %}
+                            <li class="list-group-item d-flex align-items-center" id="{{ domain }}">
+                                {{ domain }}
+                                <button type="button"
+                                        domain="{{ domain }}"
+                                        onclick="remove_domain(this.getAttribute('domain'))"
+                                        class="btn-close ms-2"
+                                        aria-label="Close"></button>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        {{ form.demanded_jobs.as_hidden }}
+        {{ form.demanded_domains.as_hidden }}
+        <div class="d-flex justify-content-between">
+            <a class="btn btn-danger rounded-pill my-4"
+               href="{% url 'students:atouts' %}"
+               role="button">Etape précédente</a>
+            <button type="submit"
+                    class="btn btn-danger bg-vermillon rounded-pill my-4"
+                    role="button">Etape suivante</button>
+        </div>
+    </form>
+    <div class="modal fade"
+         id="mail_metier"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form novalidate
+                      method="post"
+                      action="{% url 'students:mailMissingMetier' %}">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Demande de rajout de métier</h5>
+                        <button type="button"
+                                class="btn-close"
+                                data-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {% bootstrap_form form_mail %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-danger">Envoyer un mail</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script defer type='text/javascript'>
+    professions = {{ professions | safe }};
+    domains = {{ domains | safe }};
+    </script>
+{% endblock content %}

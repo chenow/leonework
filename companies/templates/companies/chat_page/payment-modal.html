@@ -1,0 +1,30 @@
+<div class="modal fade"
+     id="paymentModal"
+     tabindex="-1"
+     aria-labelledby="paymentModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Choisissez votre mode de paiement</h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex justify-content-around align-items-center h-100 space-around"
+                 style="min-height: 300px">
+                <a x-bind:href="invoice_url"
+                   type="button"
+                   class="btn btn-outline-danger rounded-pill w-40">Demande de facture</a>
+                <a type="button"
+                   href="{% url 'payment:checkout' %}"
+                   class="btn violine rounded-pill w-40"
+                   style="border : #717eff 1px solid"
+                   onmouseover="this.style.backgroundColor='#717eff';this.style.color='white'"
+                   onmouseout="this.style.backgroundColor='white';this.style.color='#717eff'">Paiement en ligne</a>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+{% extends 'mails/base_mail.html' %}
+{% block content %}
+    <p style="margin: 10px 0;
+              padding: 0;
+              mso-line-height-rule: exactly;
+              -ms-text-size-adjust: 100%;
+              -webkit-text-size-adjust: 100%;
+              color: #757575;
+              font-family: Helvetica;
+              font-size: 16px;
+              line-height: 150%;
+              text-align: left">
+        Cher(e) étudiant(e),
+        <br />
+        <br />
+        Nous avons le plaisir de vous informer qu'une entreprise a liké votre profil sur Leonework ! Cela signifie que vous avez suscité l'intérêt d'un employeur
+        potentiel et que vous avez peut-être trouvé une opportunité intéressante.
+        <br />
+        Nous vous encourageons vivement à liker le profil de cette entreprise en retour, afin que vous puissiez obtenir un match et commencer à discuter avec eux dans notre messagerie interne.
+        <br />
+        N'oubliez pas que sur leonework, le matching est mutuel, ce qui signifie que vous devez également liker le profil de l'entreprise pour pouvoir discuter avec eux.
+        <br />
+        Si vous avez des questions ou des préoccupations, n'hésitez pas à nous contacter. Nous sommes toujours là pour vous aider à réussir.
+        <br />
+        Nous vous souhaitons beaucoup de succès.
+        <br />
+        Cordialement,
+        <br />
+        <br />
+        Toute l’équipe de leonework
+    </p>
+{% endblock content %}
+{% block button %}
+    <table class="mcnButtonContentContainer"
+           style="border-collapse: separate !important;
+                  border-radius: 19px;
+                  background-color: #F0645A;
+                  mso-table-lspace: 0pt;
+                  mso-table-rspace: 0pt;
+                  -ms-text-size-adjust: 100%;
+                  -webkit-text-size-adjust: 100%"
+           cellspacing="0"
+           cellpadding="0"
+           border="0">
+        <tbody>
+            <tr>
+                <td class="mcnButtonContent"
+                    style="font-family: Helvetica;
+                           font-size: 18px;
+                           padding: 18px;
+                           mso-line-height-rule: exactly;
+                           -ms-text-size-adjust: 100%;
+                           -webkit-text-size-adjust: 100%"
+                    valign="middle"
+                    align="center">
+                    <a class="mcnButton "
+                       title="Inscription"
+                       href="https://leonework.com{% url 'students:likes' %}"
+                       target="_blank"
+                       style="font-weight: bold;
+                              letter-spacing: -0.5px;
+                              line-height: 100%;
+                              text-align: center;
+                              text-decoration: none;
+                              color: #FFFFFF;
+                              mso-line-height-rule: exactly;
+                              -ms-text-size-adjust: 100%;
+                              -webkit-text-size-adjust: 100%;
+                              display: block">Voir mes likes</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock button %}

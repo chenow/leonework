@@ -1,0 +1,182 @@
+{% extends 'generic/base_generic.html' %}
+{% load static %}
+{% block imports %}
+    <script type="text/javascript" src="{% static 'students/atouts.js' %}" defer></script>
+{% endblock imports %}
+{% block content %}
+    <form novalidate
+          action="{% url 'students:atouts' %}"
+          class="needs-validation row mt-5 d-flex justify-content-center"
+          style="max-width: 1000px;
+                 margin: auto"
+          method="post">
+        {% csrf_token %}
+        <h3 class="mb-3 violine text-center">
+            <b>Mes atouts</b>
+        </h3>
+        <div class="row mt-5">
+            <h6>
+                <b>Je parle...</b><span class='text-muted ms-3'>(5 maximum)</span>
+            </h6>
+            <small class="form-text text-muted mb-4" style="max-width: 60ch;">
+                <span class='pb-2'>- Débutant : vocabulaire basique, communication simple</span>
+                <br>
+                <span class='pb-2'>- Intermédiaire : capacité à s'exprimer dans une situation</span>
+                <br>
+                <span class='pb-2'>- Avancé : expression spontanée sur tous les sujets</span>
+                <br>
+                <span class='pb-2'>- Bilinge : niveau équivalent à sa langue maternelle</span>
+                <br>
+            </small>
+        </div>
+        <div class="row">
+            <div id="languages" class="mb-3 d-flex justify-content-left flex-wrap">
+                <div style="width: 100%">
+                    <button type="button"
+                            class="mb-3 btn btn-danger rounded-pill"
+                            data-bs-toggle="modal"
+                            data-bs-target="#languageModal">Ajouter une langue</button>
+                </div>
+                {% for language, level in spoken_languages %}
+                    <div id="chosen_{{ language }}"
+                         class="mx-2 mb-3 container-fluid border rounded-pill py-2 px-3">
+                        <div class="row">
+                            <div class="col-11">
+                                <span class='text-center violine'><b>{{ language }}</b></span>
+                                <select onchange='add_language_level("{{ language }}", this.options[this.selectedIndex].value)'
+                                        class="form-select"
+                                        aria-label="Niveau de langue">
+                                    <option value="debutant" {% if level == 'debutant' %}selected{% endif %}>Débutant</option>
+                                    <option value="intermediaire"
+                                            {% if level == 'intermediaire' %}selected{% endif %}>Intermédiaire</option>
+                                    <option value="avancee" {% if level == 'avancee' %}selected{% endif %}>Avancé</option>
+                                    <option value="bilingue" {% if level == 'bilingue' %}selected{% endif %}>Bilingue</option>
+                                </select>
+                            </div>
+                            <div class="col-1 align-items-center">
+                                <button type="button"
+                                        onclick="remove_language('{{ language }}')"
+                                        class="btn-close"
+                                        aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <h6 class="mb-4 mt-5">
+                <b>Mes principales qualités ?</b><span class='text-muted ms-3'>(5 qualités
+                maximum)</span>
+                {% for error in form.qualities.errors %}
+                    <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+                {% endfor %}
+            </h6>
+            <div id="qualities" class="mb-3 d-flex justify-content-left flex-wrap">
+                <div style="width: 100%">
+                    <button type="button"
+                            class="mb-3 btn btn-danger rounded-pill"
+                            data-bs-toggle="modal"
+                            data-bs-target="#qualitiesModal">Choisir mes qualités</button>
+                </div>
+                {% for quality in qualities %}
+                    <div class="mx-2 mb-3 border rounded-pill py-2 px-3 d-flex">
+                        <span class='text-center'>{{ quality }}</span>
+                        <button type="button"
+                                onclick="remove_quality(this)"
+                                quality="{{ quality }}"
+                                class="btn-close"
+                                aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row mb-5">
+            <h6 class="mb-3 mt-5">
+                <b>Ma vision d'avenir</b><span class='text-muted ms-3'>(de 5 à 200
+                caractères)</span>
+                {% for error in form.future_vision.errors %}
+                    <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+                {% endfor %}
+            </h6>
+            <textarea name='{{ form.future_vision.name }}'
+                      class="form-control"
+                      rows="3"
+                      placeholder='Dans 10 ans je me vois ?'>{{ form.future_vision.value | default:"" }}</textarea>
+        </div>
+        <div class="d-flex justify-content-between">
+            <a class="btn btn-danger rounded-pill my-4"
+               href="{% url 'students:parcours' %}"
+               role="button">Etape précédente</a>
+            <button type="submit" class="btn btn-danger rounded-pill my-4" role="button">Etape suivante</button>
+        </div>
+        {{ form.spoken_languages.as_hidden }}
+        {{ form.qualities.as_hidden }}
+    </form>
+    <div class="modal fade"
+         id="languageModal"
+         tabindex="-1"
+         aria-labelledby="languageModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="languageModalLabel">Langues</h1>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% for language in all_languages %}
+                        <a onclick='changeColorLanguage(this);'
+                           language='{{ language }}'
+                           class="btn border rounded-pill my-3 mx-2 {% if language in chosen_languages %}logo_color{% endif %}">{{ language }}
+                        </a>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-danger rounded-pill"
+                            data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade"
+         id="qualitiesModal"
+         tabindex="-1"
+         aria-labelledby="qualitiesModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="qualitiesModalLabel">Qualités</h1>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% for quality in all_qualities %}
+                        <a onclick='changeColorQuality(this);'
+                           quality='{{ quality }}'
+                           class="btn border rounded-pill my-3 mx-2 {% if quality in qualities %}logo_color{% endif %}">{{ quality }}
+                        </a>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-danger rounded-pill"
+                            data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block script %}
+    <script defer>
+    qualities = {{qualities | safe}}
+    spoken_languages = {{spoken_languages | safe}}   
+    </script>
+{% endblock script %}

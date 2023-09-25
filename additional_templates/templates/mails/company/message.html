@@ -1,0 +1,73 @@
+{% extends 'mails/base_mail.html' %}
+{% block content %}
+    <p style="margin: 10px 0;
+              padding: 0;
+              mso-line-height-rule: exactly;
+              -ms-text-size-adjust: 100%;
+              -webkit-text-size-adjust: 100%;
+              color: #757575;
+              font-family: Helvetica;
+              font-size: 16px;
+              line-height: 150%;
+              text-align: left">
+        Chère entreprise,
+        <br />
+        <br />
+        Nous vous informons  que vous avez reçu un message d'un étudiant  sur notre plateforme.
+        <br />
+        Nous vous encourageons vivement à répondre à ce message pour explorer les possibilités de collaboration avec cet étudiant.
+        <br />
+        Pour répondre à ce message, il vous suffit de vous connecter à notre plateforme  et d'aller sur la page de messagerie. Vous pouvez cliquer sur le message de l'étudiant pour y répondre directement.
+        <br />
+        Si vous avez des questions, n'hésitez pas à nous contacter, nous sommes là pour vous aider.
+        <br />
+        Nous vous remercions de votre confiance.
+        <br />
+        Cordialement,
+        <br />
+        <br />
+        Toute l’équipe de leonework
+    </p>
+{% endblock content %}
+{% block button %}
+    <table class="mcnButtonContentContainer"
+           style="border-collapse: separate !important;
+                  border-radius: 19px;
+                  background-color: #F0645A;
+                  mso-table-lspace: 0pt;
+                  mso-table-rspace: 0pt;
+                  -ms-text-size-adjust: 100%;
+                  -webkit-text-size-adjust: 100%"
+           cellspacing="0"
+           cellpadding="0"
+           border="0">
+        <tbody>
+            <tr>
+                <td class="mcnButtonContent"
+                    style="font-family: Helvetica;
+                           font-size: 18px;
+                           padding: 18px;
+                           mso-line-height-rule: exactly;
+                           -ms-text-size-adjust: 100%;
+                           -webkit-text-size-adjust: 100%"
+                    valign="middle"
+                    align="center">
+                    <a class="mcnButton "
+                       title="Inscription"
+                       href="https://leonework.com{% url 'companies:message' %}"
+                       target="_blank"
+                       style="font-weight: bold;
+                              letter-spacing: -0.5px;
+                              line-height: 100%;
+                              text-align: center;
+                              text-decoration: none;
+                              color: #FFFFFF;
+                              mso-line-height-rule: exactly;
+                              -ms-text-size-adjust: 100%;
+                              -webkit-text-size-adjust: 100%;
+                              display: block">Accéder à ma messagerie</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock button %}

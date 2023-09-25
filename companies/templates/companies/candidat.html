@@ -1,0 +1,158 @@
+{% extends 'generic/base_generic.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% block imports %}
+    <script type="text/javascript"
+            src="{% static 'companies/candidat.js' %}"
+            defer></script>
+{% endblock imports %}
+{% block content %}
+    <form novalidate
+          action="{% url 'companies:candidat' %}"
+          class="needs-validation row mt-5 d-flex justify-content-center"
+          method="post">
+        <h3 class="mb-3 violine text-center">
+            <b>Mon candidat idéal</b>
+        </h3>
+        {% csrf_token %}
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+            <div>
+                <label class="bold mb-3" for="id_contract_type">Il parle</label>
+                <div id="languages" class="mb-3 d-flex justify-content-left flex-wrap">
+                    <div style="width: 100%">
+                        <button type="button"
+                                class="mb-3 btn btn-danger rounded-pill"
+                                data-bs-toggle="modal"
+                                data-bs-target="#languageModal">Ajouter une langue</button>
+                    </div>
+                    {% for lang, level in spoken_languages %}
+                        <div id="chosen_{{ lang }}"
+                             class="mx-2 mb-3 container-fluid border rounded-pill py-2 px-3">
+                            <div class="row">
+                                <div class="col-11">
+                                    <span class='text-center violine'><b>{{ lang }}</b></span>
+                                    <select onchange='add_language_level("{{ lang }}", this.options[this.selectedIndex].value)'
+                                            class="form-select"
+                                            aria-label="Niveau de langue">
+                                        <option value="debutant" {% if level == 'debutant' %}selected{% endif %}>Débutant</option>
+                                        <option value="intermediaire"
+                                                {% if level == 'intermediaire' %}selected{% endif %}>
+                                            Intermédiaire
+                                        </option>
+                                        <option value="avancee" {% if level == 'avancee' %}selected{% endif %}>Avancé</option>
+                                        <option value="bilingue" {% if level == 'bilingue' %}selected{% endif %}>Bilingue</option>
+                                    </select>
+                                </div>
+                                <div class="col-1 align-items-center">
+                                    <button type="button"
+                                            onclick="remove_lang('{{ lang }}')"
+                                            class="btn-close"
+                                            aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div>
+                    <label class="bold mb-3" for="id_contract_type">Ses qualités principales</label>
+                    <span class='ps-3 text-muted'>(5 maximum)</span>
+                    <div id="qualities" class="mb-3 d-flex justify-content-left flex-wrap">
+                        <div style="width: 100%">
+                            <button type="button"
+                                    class="mb-3 btn btn-danger rounded-pill"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#qualitiesModal">Choisissez des qualités</button>
+                        </div>
+                        {% for quality in qualities %}
+                            <div class="mx-2 mb-3 border rounded-pill py-2 px-3 d-flex">
+                                <span class='text-center'>{{ quality }}</span>
+                                <button type="button"
+                                        onclick="remove_quality(this)"
+                                        quality="{{ quality }}"
+                                        class="btn-close"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% bootstrap_field form.autonomy label_class="bold mb-3" %}
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="d-flex justify-content-between mt-5">
+                <a class="btn btn-danger rounded-pill my-4"
+                   href="{% url 'companies:mission' %}"
+                   role="button">Etape précédente</a>
+                <button type="submit" class="btn btn-danger rounded-pill my-4" role="button">Etape suivante</button>
+            </div>
+            {{ form.spoken_languages.as_hidden }}
+            {{ form.qualities.as_hidden }}
+        </div>
+    </form>
+    <div class="modal fade"
+         id="qualitiesModal"
+         tabindex="-1"
+         aria-labelledby="qualitiesModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="qualitiesModalLabel">Qualités</h1>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% for quality in all_qualities %}
+                        <a onclick='changeColorQualite(this);'
+                           quality='{{ quality }}'
+                           class="btn border rounded-pill my-3 mx-2 {% if quality in qualities %}logo_color{% endif %}">{{ quality }}
+                        </a>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-danger rounded-pill"
+                            data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade"
+         id="languageModal"
+         tabindex="-1"
+         aria-labelledby="languageModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="languageModalLabel">Langues</h1>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% for language in all_languages %}
+                        <a onclick='changeColorLanguage(this);'
+                           language='{{ language }}'
+                           class="btn border rounded-pill my-3 mx-2 {% if language in spoken_languages %}logo_color{% endif %}">{{ language }}
+                        </a>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-danger rounded-pill"
+                            data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block script %}
+    <script defer>
+        qualities = {{qualities | safe}}
+        spoken_languages = {{spoken_languages | safe}}
+    </script>
+{% endblock script %}

@@ -1,0 +1,94 @@
+{% extends 'generic/base_generic.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% block imports %}
+    <script type="text/javascript"
+            src="{% static 'companies/mon_entreprise.js' %}"
+            defer></script>
+{% endblock imports %}
+{% block content %}
+    <form novalidate
+          action="{% url 'companies:company' %}"
+          class="needs-validation row mt-5 d-flex justify-content-center"
+          method="post">
+        <div class="col-md-2"></div>
+        {% csrf_token %}
+        <div class="col-md-8 mb-5">
+            <h3 class="mb-3 violine text-center">
+                <b>Mon entreprise</b>
+            </h3>
+            {% bootstrap_field form.company_size label_class='bold mb-2' %}
+            {% bootstrap_label form.company_values.label label_class='bold mb-2' %}
+            <span class="text-muted ms-3">(5 maximum)</span>
+            <div id="values" class="mb-3 d-flex justify-content-left flex-wrap">
+                <div style='width: 100%'>
+                    <button type="button"
+                            class="mb-3 btn btn-danger rounded-pill"
+                            data-bs-toggle="modal"
+                            data-bs-target="#valueModal">Choisissez vos valeurs</button>
+                </div>
+                {% for value in company_values %}
+                    <div class="mx-2 mb-3 border rounded-pill py-2 px-3 d-flex">
+                        <span class='text-center'>{{ value }}</span>
+                        <button type="button"
+                                onclick="remove_value(this)"
+                                value="{{ value }}"
+                                class="btn-close"
+                                aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+            {{ form.company_values.as_hidden }}
+            {% bootstrap_field form.overall_atmospheres label_class='bold mb-2' %}
+            {% bootstrap_field form.principal_activity label_class='bold mb-2' %}
+        </div>
+        <div class="col-md-2"></div>
+        <div class="d-flex justify-content-between">
+            <a class="btn btn-danger rounded-pill my-4"
+               href="{% url 'companies:identity' %}"
+               role="button">Etape précédente</a>
+            <button type="submit" class="btn btn-danger rounded-pill my-4" role="button">Etape suivante</button>
+        </div>
+    </form>
+    <!-- Modal -->
+    <div class="modal fade"
+         id="valueModal"
+         tabindex="-1"
+         aria-labelledby="valueModal"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="valueModal">Valeurs</h1>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% for value in all_values %}
+                        <a onclick='changeColor(this);'
+                           value='{{ value }}'
+                           class="btn border rounded-pill my-3 mx-2 {% if value in company_values %}logo_color{% endif %}">{{ value }}
+                        </a>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-danger rounded-pill"
+                            data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+  div#id_company_size div,
+  div#id_overall_atmospheres div {
+    display: inline-block;
+    margin: 0 10px 0 10px;
+  }
+    </style>
+{% endblock content %}
+{% block script %}
+    <script defer>var company_values = {{ company_values | safe }};</script>
+{% endblock script %}

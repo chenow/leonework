@@ -1,0 +1,28 @@
+{% extends 'generic/base_generic.html' %}
+{% block content %}
+    <div class="row justify-content-lg-center">
+        <div class="col-lg-4">
+            <form method="post" class='d-flex justify-content-center flex-column'>
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group py-2">
+                        <label class="col-form-label font-weight-normal">
+                            {{ field.label }}
+                            {% for error in field.errors %}
+                                <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+                            {% endfor %}
+                        </label>
+                        <div>
+                            <input type="{{ field.name }}"
+                                   name="{{ field.name }}"
+                                   class="form-control"
+                                   value="{{ field.value|default_if_none:'' }}"
+                                   placeholder="{{ field.field.widget.attrs.placeholder }}">
+                        </div>
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-danger rounded-pill my-4">Envoyer un nouveau mail</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% extends 'generic/base_generic.html' %}
+{% block content %}
+    <div class="d-flex justify-content-center">
+        <form novalidate
+              action="{% url 'welcome_pages:delete_account' %}"
+              method="post"
+              class="d-flex justify-content-center flex-column text-center"
+              style="max-width: 400px">
+            <h5>Attention, vous êtes sur le point de supprimer votre compte. Cette action est irréversible.</h5>
+            <button type="submit" class="btn btn-danger rounded-pill my-4">Supprimer mon compte</button>
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,34 @@
+{% extends 'generic/base_generic.html' %}
+{% load static %}
+{% block content %}
+    <div class="row my-4">
+        <div class="col-12 text-center">
+            <h1>Quel est votre type de profil?</h1>
+        </div>
+    </div>
+    <div class="row text-center mt-5 justify-content-md-center">
+        <div class="col-md-4 shadow me-1 p-3 mb-5 bg-body">
+            <img src="{% static 'images/leonework/illustrations_leonework_2_carre.png' %}"
+                 width="200px"
+                 class="img-fluid bg-gray rounded-circle">
+            <br>
+            <h3>Entreprise</h3>
+            Je trouve mes étudiants
+            <br>
+            <a href="{% url 'companies:identity' %}"
+               class="btn btn-danger rounded-pill mt-3">C'est parti !</a>
+        </div>
+        <div class="col-md-4 shadow p-3 mb-5 bg-body">
+            <img src="{% static 'images/leonework/illustrations_leonework_8_carre.png' %}"
+                 width="200px"
+                 class="img-fluid bg-gray rounded-circle">
+            <br>
+            <h3>Étudiant</h3>
+            Je trouve mon entreprise
+            <br>
+            <a href="{% url 'students:identity' %}"
+               class="btn btn-danger rounded-pill mt-3">C'est parti !</a>
+        </div>
+    </div>
+    <div class="row spacer"></div>
+{% endblock content %}

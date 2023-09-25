@@ -1,0 +1,229 @@
+{% extends 'generic/base_generic.html' %}
+{% load static %}
+{% block bg_color %}
+    background-color: rgba(230, 245, 225, 0.2)!important;
+{% endblock bg_color %}
+{% block imports %}
+    <script type="text/javascript" src="{% static 'companies/search.js' %}" defer></script>
+    <script type="text/javascript"
+            src="{% static 'companies/base_companies.js' %}"
+            defer></script>
+    <link rel="stylesheet" href="{% static 'companies/companies.css' %}" />
+{% endblock imports %}
+{% block content %}
+    <div class="row mt-4 mb-3">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <h3 class="position-relative violine text-center">
+                <b>Mes candidats</b>
+            </h3>
+            <div class="row d-flex mt-4 mb-3">
+                <p style="max-width: 50ch" class="text-center">
+                    Likez grâce au bouton ♥️ vos candidats favoris, s’ils  vous likent en retour, vous aurez un match, vous pourrez alors  échanger ensemble.
+                </p>
+                <div id="test"></div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <li class="w-100 d-flex flex-row-reverse">
+                <a href="{% url 'companies:researches' %}"
+                   class="btn btn-danger bg-vermillon bold rounded-pill mt-3"
+                   role="button"><i class="bi bi-pencil me-2"></i>Modifier ma recherche
+                </a>
+            </li>
+            <li class="w-100 d-flex flex-row-reverse">
+                <a href="{% url 'companies:create_job' %}"
+                   class="btn btn-danger bg-vermillon bold rounded-pill mt-3"
+                   role="button"><i class="bi bi-plus-circle-dotted me-2"></i>Ajouter une annonce</a>
+            </li>
+        </div>
+        <div class="modal fade"
+             id="delete_profile"
+             tabindex="-1"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Retirer mon annonce</h1>
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Vous êtes sur le point de retirer votre annonce pour <b>{{ job.proposed_job }}</b>, cette action est irréversible.
+                    </div>
+                    <a href="{% url 'companies:delete_profil' %}"
+                       class="btn btn-danger bg-vermillon bold rounded-pill mx-4"
+                       style="max-width: 150px"
+                       role="button">Suppression</a>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="nav nav-tabs d-flex justify-content-center mb-4 border-bottom">
+        {% for possible_job in jobs %}
+            <li class="nav-item">
+                <a class="nav-link text-dark pb-3 {% if possible_job.pk == job.pk %}bold{% endif %}"
+                   {% if possible_job.pk == job.pk %}style="border-bottom: 2px solid black"{% endif %}
+                   {% if possible_job.pk == job.pk %}aria-current="page"{% endif %}
+                   href="{% url 'companies:search_job' possible_job.pk %}">{{ possible_job.proposed_job }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</ul>
+<div class="d-flex justify-content-center mb-4">
+    Veillez à bien sélectionner l’annonce concernée  pour pouvoir voir les candidats/ likes/Matchs et Messages. Toutes les fonctionnalités sont reliées sur le titre du poste
+</div>
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="f-flex justify-content-between ">
+            <a class="btn violine bold" href="{% url 'home:index' %}"><i class="bi bi-arrow-repeat pe-2" style="font-size: 1.5em"></a></i>Actualiser pour revenir à ma recherche initiale
+            </div>
+            <div class="card shadow" style="width: 100%;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Filtrer par :</li>
+                    <li class="list-group-item">
+                        <div class="form-check form-switch">
+                            <label class="form-check-label" for="matchingOndomaine">Matching sur les domaines</label>
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   role="switch"
+                                   checked
+                                   onchange="update_companies();"
+                                   id="matchingOndomaine">
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="form-check form-switch">
+                            <label class="form-check-label" for="matchingOnDepartement">Recherche dans les villes proches</label>
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   role="switch"
+                                   checked
+                                   onchange="update_companies();"
+                                   id="matchingOnDepartement">
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="">
+                            <label class="form-check-label" for="datepicker">Date début mission</label>
+                            <input name="beginning_date"
+                                   id="datepicker"
+                                   type="text"
+                                   class="form-control"
+                                   onchange="update_companies();"
+                                   value="{{ job.beginning_date | date:'d/m/Y' | default:'' }}">
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="">
+                            <label class="form-check-label" for="datepicker">Date fin mission</label>
+                            <input name="ending_date"
+                                   id="datepicker2"
+                                   type="text"
+                                   class="form-control"
+                                   onchange="update_companies();"
+                                   value="{{ job.ending_date | date:'d/m/Y' | default:'' }}">
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <h6>Travail le weekend ?</h6>
+                        <input class="mx-2"
+                               type="radio"
+                               name="travail_wekeend"
+                               value="samedi"
+                               onchange="update_companies();"
+                               {% if job.work_weekend == "samedi" %}checked{% endif %}>
+                        <label for="samedi">Oui, le Samedi</label>
+                        <br>
+                        <input class="mx-2"
+                               type="radio"
+                               name="travail_wekeend"
+                               value="dimanche"
+                               onchange="update_companies();"
+                               {% if job.work_weekend == "dimanche" %}checked{% endif %}>
+                        <label for="dimanche">Oui, le Dimanche</label>
+                        <br>
+                        <input class="mx-2"
+                               type="radio"
+                               name="travail_wekeend"
+                               value="les_deux"
+                               onchange="update_companies();"
+                               {% if job.work_weekend == "les_deux" %}checked{% endif %}>
+                        <label for="deux">Oui, les deux jours</label>
+                        <br>
+                        <input class="mx-2"
+                               type="radio"
+                               name="travail_wekeend"
+                               value="False"
+                               onchange="update_companies();"
+                               {% if job.work_weekend == "False" %}checked{% endif %}>
+                        <label for="non">Non</label>
+                        <br>
+                    </li>
+                    <li class="list-group-item">
+                        <h6>Niveau d'encadrement ?</h6>
+                        <input class="mx-2"
+                               type="checkbox"
+                               name="encadrement"
+                               value="faible"
+                               onchange="update_companies();"
+                               {% if "faible" in job.autonomy %}checked{% endif %}>
+                        <label for="samedi">Faible</label>
+                        <br>
+                        <input class="mx-2"
+                               type="checkbox"
+                               name="encadrement"
+                               value="moyen"
+                               onchange="update_companies();"
+                               {% if "moyen" in job.autonomy %}checked{% endif %}>
+                        <label for="dimanche">Moyen</label>
+                        <br>
+                        <input class="mx-2"
+                               type="checkbox"
+                               name="encadrement"
+                               value="important"
+                               onchange="update_companies();"
+                               {% if "important" in job.autonomy %}checked{% endif %}>
+                        <label for="deux">Important</label>
+                        <br>
+                    </li>
+                    <li class="list-group-item">
+                        <h6>Télétravail ?</h6>
+                        <input class="mx-2"
+                               type="radio"
+                               name="teleworking"
+                               value="True"
+                               onchange="update_companies();"
+                               {% if job.teleworking == "True" %}checked{% endif %}>
+                        <label for="samedi">Oui</label>
+                        <br>
+                        <input class="mx-2"
+                               type="radio"
+                               name="teleworking"
+                               value="False"
+                               onchange="update_companies();"
+                               {% if job.teleworking == "False" %}checked{% endif %}>
+                        <label for="dimanche">Non</label>
+                        <br>
+                        <input class="mx-2"
+                               type="radio"
+                               name="teleworking"
+                               value="None"
+                               onchange="update_companies();"
+                               {% if job.teleworking == "None" %}checked{% endif %}>
+                        <label for="deux">A definir</label>
+                        <br>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid col-md-9" id="student_list"></div>
+    </div>
+{% endblock %}
+{% block script %}<script>var job_pk = {{job.pk }}</script>{% endblock %}

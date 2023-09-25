@@ -1,0 +1,26 @@
+{% extends 'generic/base_generic.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% block imports %}
+    <script type="text/javascript"
+            src="{% static 'companies/candidat.js' %}"
+            defer></script>
+{% endblock imports %}
+{% block content %}
+    <div class="d-flex justify-content-center mt-5">
+        <div class="align-self-center mt-5">
+            <form action="{% url 'companies:engagement' %}" method="post">
+                <p style="max-width: 50ch" class="bold violine text-center">
+                    En cochant cette case, vous acceptez les Conditions Générales de Vente (CGV) de leonework et vous vous engagez à payer la somme de 149 € HT en cas de succès sur le recrutement d'un candidat.
+                </p>
+                {% csrf_token %}
+                <div class="d-flex justify-content-center mt-5">
+                    <div class="align-self-center">
+                        {% bootstrap_form form %}
+                        <button type="submit" class="btn btn-danger rounded-pill my-4" role="button">Je m'engage</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

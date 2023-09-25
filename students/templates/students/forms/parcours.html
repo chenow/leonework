@@ -1,0 +1,119 @@
+<h3 class="mb-5 violine text-center">
+    <b>Mon Parcours</b>
+</h3>
+<div class="row d-flex justify-content-center">
+    <h5 class="mb-3">
+        <b>Mes diplômes</b>
+    </h5>
+    <div class="col-md-12 mb-3 ui-widget">
+        <label class="mb-2">Diplôme en préparation</label>
+        <a class="px-2"
+           href="#"
+           data-bs-toggle="modal"
+           data-bs-target="#exampleModal">Je ne trouve pas mon diplôme ?</a>
+        {% for error in form.ongoing_degree.errors %}
+            <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+        {% endfor %}
+        <input id="ongoing_degree"
+               value="{{ form.ongoing_degree.value | default:"" }}"
+               placeholder="Faites votre recherche..."
+               name="{{ form.ongoing_degree.name }}"
+               class="form-group form-control">
+    </input>
+</div>
+<div class="col-md-6 mb-3">
+    <label class="mb-2">Nom de votre école</label>
+    {% for error in form.school.errors %}
+        <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+    {% endfor %}
+    <input type="text"
+           name="{{ form.school.name }}"
+           class="form-group form-control"
+           value="{{ form.school.value | default:'' }}"
+           placeholder="Ecole Coding Academy">
+</div>
+<div class="col-md-6 mb-3">
+    <label class="text-nowrap mb-2">Année en préparation</label>
+    {% for error in form.ongoing_year.errors %}
+        <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+    {% endfor %}
+    <select name="{{ form.ongoing_year.name }}" class="form-select form-group">
+        {% for value, text in form.ongoing_year.field.choices %}
+            <option value="{{ value }}"
+                    {% if value == form.ongoing_year.value %}selected{% endif %}>{{ text }}</option>
+        {% endfor %}
+    </select>
+</div>
+<div class="col-md-12 mb-3">
+    <label class="mb-2">Dernier diplôme obtenu</label>
+    {% for error in form.last_degree.errors %}
+        <strong class="text-danger font-weight-normal" style="padding-left: 5px">*{{ error|escape }}</strong>
+    {% endfor %}
+    <input value="{{ form.last_degree.value | default:'' }}"
+           name="{{ form.last_degree.name }}"
+           class="form-group form-control">
+</input>
+</div>
+<h5 class="mb-3 mt-5">
+    <b>Mes 3 meilleures expériences</b>
+</h5>
+<template x-for="experience in experiences">
+    <div class="row mb-3">
+        <div class="col-md-4 mb-3">
+            <label class="mb-2">Type d'expérience</label>
+            <span class="form-control" x-text="experience[0]"></span>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label class="mb-2">Entreprise</label>
+            <span class="form-control"  x-text="experience[1]"></span>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label class="mb-2">Durée</label>
+            <span class="form-control"  x-text="experience[2]"></span>
+        </div>
+        <div class="col-md-3 mb-3">
+            <button type="button"
+                    class="btn-close position-relative top-50 start-0 translate-middle-y"
+                    aria-label="Close"
+                    x-on:click="experiences = experiences.filter(e => e !== experience)"></button>
+        </div>
+    </div>
+</template>
+<div class="row mb-5">
+    <div class="col-md-4 mb-3">
+        <label class='mb-2'>Type d'expérience</label>
+        <select id="type" class="form-select">
+            <option selected>Choississez un type d'expérience</option>
+            <option value="stage">Stage</option>
+            <option value="alternance">Alternance</option>
+            <option value="cdd">CDD</option>
+            <option value="cdi">CDI</option>
+            <option value="benevolat">Bénévolat</option>
+            <option value="autre">Autre</option>
+        </select>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label class='mb-2'>Entreprise</label>
+        <input id="ent"
+               type="text"
+               class="form-control"
+               placeholder="Agence pamplemousse">
+    </div>
+    <div class="col-md-2 mb-3">
+        <label class='mb-2'>Durée</label>
+        <input id="duree" type="text" class="form-control" placeholder="1 an">
+    </div>
+    <div class="col-md-3 mb-2">
+        <label class='mb-2' style="color: white;">a</label>
+        <a x-on:click="addExperience()"
+           class="form-control btn btn-danger rounded-pill logo_color"
+           role="button">Ajouter
+        une expérience</a>
+        <input type="text"
+               name="{{ form.experiences.name }}"
+               x-model="experiencesInput"
+               hidden>
+    </div>
+</div>
+</div>
+</div>

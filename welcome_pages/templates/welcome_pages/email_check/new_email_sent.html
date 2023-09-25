@@ -1,0 +1,15 @@
+{% extends 'generic/base_generic.html' %}
+{% block content %}
+    <div class="row justify-content-lg-center mt-5">
+        <div class="col-lg-6 text-center">
+            Nous avons bien envoyé un nouveau mail de validation. Si vous ne trouvez pas le mail, pensez à vérifier vos
+            spams, puis redemendez un lien en vérifiant bien l'adresse mail entrée.
+        </div>
+        <div class="row d-flex justify-content-lg-center my-5">
+            <div class="d-flex justify-content-lg-center">
+                Vous ne trouvez toujours pas le mail de validation ? <a href="{% url 'request-new-link-from-email' %}">Demander un
+            nouveau lien</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

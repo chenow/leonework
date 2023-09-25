@@ -1,0 +1,9 @@
+{% for valeur in valeurs %}
+    <div class="mx-2 mb-3 border rounded-pill py-2 px-3 d-flex">
+        <span class='text-center'>{{ valeur }}</span>
+        <button type="button"
+                onclick="remove_valeur('{{ valeur }}')"
+                class="btn-close"
+                aria-label="Close"></button>
+    </div>
+{% endfor %}

@@ -1,0 +1,24 @@
+<div class="mesgs">
+    <div class="msg_history" id="messages">
+        <p class="text-muted text-center">veuillez sélectionner une conversation.</p>
+    </div>
+    <div class="type_msg">
+        <div class="input_msg_write">
+            <textarea type="text"
+                      name="chat"
+                      id='chat_id'
+                      class="write_msg"
+                      rows="3"
+                      style="width: 80%;
+                             resize: none"
+                      placeholder="Ecrivez un message..."></textarea>
+            <button class="msg_send_btn" onclick="send_message()">
+                <i class="bi bi-send"></i>
+            </button>
+            <input type="hidden"
+                   name="student_id"
+                   id="student_id"
+                   x-model="student_pk_conversation" />
+        </div>
+    </div>
+</div>

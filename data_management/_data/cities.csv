@@ -1,0 +1,298 @@
+city,department,region
+Agen,47,Nouvelle-Aquitaine
+Aix-en-Provence,13,Provence-Alpes-Côte d'Azur
+Aix-les-Bains,73,Auvergne-Rhône-Alpes
+Ajaccio,2A,Corse
+Albi,81,Occitanie
+Alès,30,Occitanie
+Alfortville,94,Île-de-France
+Amiens,80,Hauts-de-France
+Angers,49,Pays de la Loire
+Anglet,64,Nouvelle-Aquitaine
+Angoulême,16,Nouvelle-Aquitaine
+Annecy,74,Auvergne-Rhône-Alpes
+Annemasse,74,Auvergne-Rhône-Alpes
+Antibes,6,Provence-Alpes-Côte d'Azur
+Antony,92,Île-de-France
+Argenteuil,95,Île-de-France
+Arles,13,Provence-Alpes-Côte d'Azur
+Arras,62,Hauts-de-France
+Asnières-sur-Seine,92,Île-de-France
+Athis-Mons,91,Île-de-France
+Aubagne,13,Provence-Alpes-Côte d'Azur
+Aubervilliers,93,Île-de-France
+Aulnay-sous-Bois,93,Île-de-France
+Auxerre,89,Bourgogne-Franche-Comté
+Avignon,84,Provence-Alpes-Côte d'Azur
+Bagneux,92,Île-de-France
+Bagnolet,93,Île-de-France
+Baie-Mahault,971,Guadeloupe
+Bastia,2B,Corse
+Bayonne,64,Nouvelle-Aquitaine
+Beauvais,60,Hauts-de-France
+Bègles,33,Nouvelle-Aquitaine
+Belfort,90,Bourgogne-Franche-Comté
+Besançon,25,Bourgogne-Franche-Comté
+Béziers,34,Occitanie
+Bezons,95,Île-de-France
+Blois,41,Centre-Val de Loire
+Bobigny,93,Île-de-France
+Bondy,93,Île-de-France
+Bordeaux,33,Nouvelle-Aquitaine
+Boulogne-Billancourt,92,Île-de-France
+Boulogne-sur-Mer,62,Hauts-de-France
+Bourg-en-Bresse,1,Auvergne-Rhône-Alpes
+Bourges,18,Centre-Val de Loire
+Brest,29,Bretagne
+Brive-la-Gaillarde,19,Nouvelle-Aquitaine
+Bron,69,Auvergne-Rhône-Alpes
+Cachan,94,Île-de-France
+Caen,14,Normandie
+Cagnes-sur-Mer,6,Provence-Alpes-Côte d'Azur
+Calais,62,Hauts-de-France
+Caluire-et-Cuire,69,Auvergne-Rhône-Alpes
+Cambrai,59,Hauts-de-France
+Cannes,6,Provence-Alpes-C
+Carcassonne,11,Occitanie
+Castres,81,Occitanie
+Cayenne,973,Guyane
+Cergy,95,Île-de-France
+Chalon-sur-Saône,71,Bourgogne-Franche-Comté
+Châlons-en-Champagne,51,Grand Est
+Chambéry,73,Auvergne-Rhône-Alpes
+Champigny-sur-Marne,94,Île-de-France
+Charleville-Mézières,8,Grand Est
+Chartres,28,Centre-Val de Loire
+Châteauroux,36,Centre-Val de Loire
+Châtellerault,86,Nouvelle-Aquitaine
+Châtenay-Malabry,92,Île-de-France
+Châtillon,92,Île-de-France
+Chatou,78,Île-de-France
+Chelles,77,Île-de-France
+Cherbourg-en-Cotentin,50,Normandie
+Choisy-le-Roi,94,Île-de-France
+Cholet,49,Pays de la Loire
+Clamart,92,Île-de-France
+Clermont-Ferrand,63,Auvergne-Rhône-Alpes
+Clichy-la-Garenne,92,Île-de-France
+Colmar,68,Grand Est
+Colombes,92,Île-de-France
+Colomiers,31,Occitanie
+Compiègne,60,Hauts-de-France
+Conflans-Sainte-Honorine,78,Île-de-France
+Corbeil-Essonnes,91,Île-de-France
+Courbevoie,92,Île-de-France
+Creil,60,Hauts-de-France
+Créteil,94,Île-de-France
+Dijon,21,Bourgogne-Franche-Comté
+Douai,59,Hauts-de-France
+Draguignan,83,Provence-Alpes-Côte d'Azur
+Drancy,93,Île-de-France
+Dreux,28,Centre-Val de Loire
+Dumbéa11,988,Nouvelle-Calédonie
+Dunkerque,59,Hauts-de-France
+Échirolles,38,Auvergne-Rhône-Alpes
+Épinal,88,Grand Est
+Épinay-sur-Seine,93,Île-de-France
+Évreux,27,Normandie
+Évry-Courcouronnes,91,Île-de-France
+Fontenay-sous-Bois,94,Île-de-France
+Fort-de-France,972,Martinique
+Franconville,95,Île-de-France
+Fréjus,83,Provence-Alpes-Côte d'Azur
+Gagny,93,Île-de-France
+Gap,5,Provence-Alpes-Côte d'Azur
+Garges-lès-Gonesse,95,Île-de-France
+Gennevilliers,92,Île-de-France
+Goussainville,95,Île-de-France
+Grasse,6,Provence-Alpes-Côte d'Azur
+Grenoble,38,Auvergne-Rhône-Alpes
+Haguenau,67,Grand Est
+Herblay-sur-Seine,95,Île-de-France
+Houilles,78,Île-de-France
+Hyères,83,Provence-Alpes-Côte d'Azur
+Issy-les-Moulineaux,92,Île-de-France
+Istres,13,Provence-Alpes-Côte d'Azur
+Ivry-sur-Seine,94,Île-de-France
+Joué-lès-Tours,37,Centre-Val de Loire
+Koungou,976,Mayotte
+L'Haÿ-les-Roses,94,Île-de-France
+La Ciotat,13,Provence-Alpes-Côte d'Azur
+La Courneuve,93,Île-de-France
+La Possession,974,La Réunion
+La Roche-sur-Yon,85,Pays de la Loire
+La Rochelle,17,Nouvelle-Aquitaine
+La Seyne-sur-Mer,83,Provence-Alpes-Côte d'Azur
+Laval,53,Pays de la Loire
+Le Blanc-Mesnil,93,Île-de-France
+Le Cannet,6,Provence-Alpes-Côte d'Azur
+Le Chesnay-Rocquencourt,78,Île-de-France
+Le Havre,76,Normandie
+Le Lamentin,972,Martinique
+Le Mans,72,Pays de la Loire
+Le Perreux-sur-Marne,94,Île-de-France
+Le Plessis-Robinson,92,Île-de-France
+Le Port,974,La Réunion
+Le Tampon,974,La Réunion
+Lens,62,Hauts-de-France
+Les Abymes,971,Guadeloupe
+Les Mureaux,78,Île-de-France
+Les Sables-d'Olonne,85,Pays de la Loire
+Levallois-Perret,92,Île-de-France
+Liévin,62,Hauts-de-France
+Lille,59,Hauts-de-France
+Limoges,87,Nouvelle-Aquitaine
+Livry-Gargan,93,Île-de-France
+Lorient,56,Bretagne
+Lyon,69,Auvergne-Rhône-Alpes
+Mâcon,71,Bourgogne-Franche-Comté
+Maisons-Alfort,94,Île-de-France
+Malakoff,92,Île-de-France
+Mamoudzou,976,Mayotte
+Mantes-la-Jolie,78,Île-de-France
+Marcq-en-Barœul,59,Hauts-de-France
+Marignane,13,Provence-Alpes-Côte d'Azur
+Marseille,13,Provence-Alpes-Côte d'Azur
+Martigues,13,Provence-Alpes-Côte d'Azur
+Massy,91,Île-de-France
+Matoury,973,Guyane
+Meaux,77,Île-de-France
+Melun,77,Île-de-France
+Menton,6,Provence-Alpes-Côte d'Azur
+Mérignac,33,Nouvelle-Aquitaine
+Metz,57,Grand Est
+Meudon,92,Île-de-France
+Meyzieu,69,Auvergne-Rhône-Alpes
+Montauban,82,Occitanie
+Montélimar,26,Auvergne-Rhône-Alpes
+Montigny-le-Bretonneux,78,Île-de-France
+Montluçon,3,Auvergne-Rhône-Alpes
+Montpellier,34,Occitanie
+Montreuil,93,Île-de-France
+Montrouge,92,Île-de-France
+Mulhouse,68,Grand Est
+Nancy,54,Grand Est
+Nanterre,92,Île-de-France
+Nantes,44,Pays de la Loire
+Narbonne,11,Occitanie
+Neuilly-sur-Marne,93,Île-de-France
+Neuilly-sur-Seine,92,Île-de-France
+Nevers,58,Bourgogne-Franche-Comté
+Nice,6,Provence-Alpes-Côte d'Azur
+Nîmes,30,Occitanie
+Niort,79,Nouvelle-Aquitaine
+Nogent-sur-Marne,94,Île-de-France
+Noisy-le-Grand,93,Île-de-France
+Noisy-le-Sec,93,Île-de-France
+Nouméa11,988,Nouvelle-Calédonie
+Orléans,45,Centre-Val de Loire
+Palaiseau,91,Île-de-France
+Pantin,93,Île-de-France
+Paris,75,Île-de-France
+Pau,64,Nouvelle-Aquitaine
+Perpignan,66,Occitanie
+Pessac,33,Nouvelle-Aquitaine
+Pierrefitte-sur-Seine,93,Île-de-France
+Plaisir,78,Île-de-France
+Poissy,78,Île-de-France
+Poitiers,86,Nouvelle-Aquitaine
+Pontault-Combault,77,Île-de-France
+Pontoise,95,Île-de-France
+Puteaux,92,Île-de-France
+Quimper,29,Bretagne
+Reims,51,Grand Est
+Rennes,35,Bretagne
+Rezé,44,Pays de la Loire
+Rillieux-la-Pape,69,Auvergne-Rhône-Alpes
+Roanne,42,Auvergne-Rhône-Alpes
+Romainville,93,Île-de-France
+Romans-sur-Isère,26,Auvergne-Rhône-Alpes
+Rosny-sous-Bois,93,Île-de-France
+Roubaix,59,Hauts-de-France
+Rouen,76,Normandie
+Rueil-Malmaison,92,Île-de-France
+Saint-André,974,La Réunion
+Saint-Benoît,974,La Réunion
+Saint-Brieuc,22,Bretagne
+Saint-Chamond,42,Auvergne-Rhône-Alpes
+Saint-Cloud,92,Île-de-France
+Saint-Denis,93,Île-de-France
+Saint-Denis,974,La Réunion
+Saint-Étienne,42,Auvergne-Rhône-Alpes
+Saint-Germain-en-Laye,78,Île-de-France
+Saint-Herblain,44,Pays de la Loire
+Saint-Joseph,974,La Réunion
+Saint-Laurent-du-Maroni,973,Guyane
+Saint-Leu,974,La Réunion
+Saint-Louis,974,La Réunion
+Saint-Malo,35,Bretagne
+Saint-Martin,971,Saint-Martin
+Saint-Martin-d'Hères,38,Auvergne-Rhône-Alpes
+Saint-Maur-des-Fossés,94,Île-de-France
+Saint-Médard-en-Jalles,33,Nouvelle-Aquitaine
+Saint-Nazaire,44,Pays de la Loire
+Saint-Ouen-sur-Seine,93,Île-de-France
+Saint-Paul,974,La Réunion
+Saint-Pierre,974,La Réunion
+Saint-Priest,69,Auvergne-Rhône-Alpes
+Saint-Quentin,2,Hauts-de-France
+Saint-Raphaël,83,Provence-Alpes-Côte d'Azur
+Sainte-Geneviève-des-Bois,91,Île-de-France
+Sainte-Marie,974,La Réunion
+Salon-de-Provence,13,Provence-Alpes-Côte d'Azur
+Sarcelles,95,Île-de-France
+Sartrouville,78,Île-de-France
+Savigny-sur-Orge,91,Île-de-France
+Schiltigheim,67,Grand Est
+Sète,34,Occitanie
+Sevran,93,Île-de-France
+Six-Fours-les-Plages,83,Provence-Alpes-Côte d'Azur
+Stains,93,Île-de-France
+Strasbourg,67,Grand Est
+Suresnes,92,Île-de-France
+Talence,33,Nouvelle-Aquitaine
+Tarbes,65,Occitanie
+Thiais,94,Île-de-France
+Thionville,57,Grand Est
+Thonon-les-Bains,74,Auvergne-Rhône-Alpes
+Toulon,83,Provence-Alpes-Côte d'Azur
+Toulouse,31,Occitanie
+Tourcoing,59,Hauts-de-France
+Tours,37,Centre-Val de Loire
+Trappes,78,Île-de-France
+Tremblay-en-France,93,Île-de-France
+Troyes,10,Grand Est
+Valence,26,Auvergne-Rhône-Alpes
+Valenciennes,59,Hauts-de-France
+Vannes,56,Bretagne
+Vaulx-en-Velin,69,Auvergne-Rhône-Alpes
+Vénissieux,69,Auvergne-Rhône-Alpes
+Versailles,78,Île-de-France
+Vigneux-sur-Seine,91,Île-de-France
+Villefranche-sur-Saône,69,Auvergne-Rhône-Alpes
+Villejuif,94,Île-de-France
+Villemomble,93,Île-de-France
+Villenave-d'Ornon,33,Nouvelle-Aquitaine
+Villeneuve-d'Ascq,59,Hauts-de-France
+Villeneuve-Saint-Georges,94,Île-de-France
+Villepinte,93,Île-de-France
+Villeurbanne,69,Auvergne-Rhône-Alpes
+Vincennes,94,Île-de-France
+Viry-Châtillon,91,Île-de-France
+Vitrolles,13,Provence-Alpes-Côte d'Azur
+Vitry-sur-Seine,94,Île-de-France
+Wattrelos,59,Hauts-de-France
+Yerres,91,Île-de-France
+Yevres,28,Centre-Val de Loire
+Yonne,89,Bourgogne-Franche-Comté
+Yssingeaux,43,Auvergne-Rhône-Alpes
+Yutz,57,Grand Est
+Yvelines,78,Île-de-France
+Yvetot,76,Normandie
+Yvré-l'Évêque,72,Pays de la Loire
+Yzeure,3,Auvergne-Rhône-Alpes
+Yzeures-sur-Creuse,37,Centre-Val de Loire
+Zillisheim,68,Grand Est
+Zoufftgen,57,Grand Est
+Zuydcoote,59,Hauts-de-France
+Zuytpeene,59,Hauts-de-France

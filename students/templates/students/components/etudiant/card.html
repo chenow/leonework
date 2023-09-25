@@ -1,0 +1,45 @@
+<div class="col-sm-3">
+    <small class="card h-100 shadow">
+        <div class="card-body">
+            <div class="card-title d-flex pb-2 border-bottom">
+                <img src="https://via.placeholder.com/80" class="rounded-circle me-4" />
+                <div>
+                    <span class="bold">Leonework</span>
+                    <br>
+                    <span class="text-muted">Finance</span>
+                </div>
+            </div>
+            <small class="card-text container-fluid">
+                <div class="row mb-2">
+                    <div class="col-2 p-0 text-center">{% bs_icon 'calendar' %}</div>
+                    <div class="col-10 p-0">De Sept. 2022 à Janv. 2022</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-2 p-0 text-center">{% bs_icon 'briefcase' %}</div>
+                    <div class="col-10 p-0">
+                        {% for metier in company.proposed_job %}
+                            <span>{{ metier }}</span>
+                            <br>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-2 p-0 text-center">{% bs_icon 'geo-alt' %}</div>
+                    <div class="col-10 p-0">Sur : Lyon</div>
+                </div>
+                <div>
+                    <div style='color: #f0645a'
+                         class="d-inline-block border bold border-danger rounded-pill m-1 px-2 py-1">Créativité</div>
+                    <div style='color: #f0645a'
+                         class="d-inline-block border bold border-danger rounded-pill m-1 px-2 py-1">Dynamisme</div>
+                    <div style='color: #f0645a'
+                         class="d-inline-block border bold border-danger rounded-pill m-1 px-2 py-1">Motivation</div>
+                </div>
+                <footer class="d-flex justify-content-between">
+                    <div class="bold d-flex align-items-center">{% bs_icon 'caret-right' extra_classes="me-1" %} voir la fiche</div>
+                    <button class="btn p-0 btn-lg">{% bs_icon 'heart' color='#f0645a' size='1.3em' %}</button>
+                </footer>
+            </small>
+        </div>
+    </small>
+</div>

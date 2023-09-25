@@ -1,0 +1,385 @@
+{% extends "generic/base_generic.html" %}
+{% load static %}
+{% block imports %}
+    <script type="text/javascript" src="{% static 'payment/offres.js' %}" defer></script>
+{% endblock imports %}
+{% block bg_color %}
+{% endblock bg_color %}
+{% block content %}
+    <small>
+        <small>
+            <div class="container-fluid px-4" id="hanging-icons">
+                <h2 class="pb-2 mt-4 border-botton text-center violine bold">Choisissez l’offre qui correspond à vos besoins</h2>
+                <div class="row g-4 pt-2 row-cols-1 row-cols-lg-3">
+                    <div class="col-lg-3 d-flex align-items-start p-3">
+                        <form class="border border-dark rounded-pill shadow"
+                              style="background-color: #d1ddfe"
+                              action="{% url 'payment:checkout' %}"
+                              method="post">
+                            {% csrf_token %}
+                            {% for offer in offers %}
+                                {% if offer.name == "A la carte" %}
+                                    <input type="hidden" name="priceId" value="{{ offer.price_id }}" />
+                                    <h3 class="fs-2 bold text-center m-3 mb-2">A la carte</h3>
+                                    <div class="d-flex justify-content-center">
+                                        <h5 class="m-3 py-2 w-100 bg-vermillon text-center text-white bold"
+                                            style="border-radius: 100px">
+                                            <div>{{ offer.price }}€ HT</div>
+                                            <div style="font-size: 15px" class="pt-2">Pack valable 1 an</div>
+                                        </h5>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            <p class="explanation m-3  mb-0 text-danger">
+                                Publiez 1 à 2 annonces sur notre plateforme avec une durée d’utilisation et de publication pendant 1 an. Profitez de nos fonctionnalités de matchmaking exclusives pour un recrutement selon vos valeurs.
+                            </p>
+                            <ul class="list-group">
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Recherche de candidats illimité</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Matching illimité</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Messagerie Instantanée</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Accompagnement à l'inscription</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.5rem; color: red;" class="bi bi-x"> </i>
+                                        </div>
+                                        <div class="col-10">Accompagnement à la rédaction de votre annonce</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.5rem; color: red;" class="bi bi-x"> </i>
+                                        </div>
+                                        <div class="col-10">Rdv 1 x par mois avec votre conseiller dédié</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.5rem; color: red;" class="bi bi-x"> </i>
+                                        </div>
+                                        <div class="col-10">Nous cherchons avec vous selon vos besoins pour une satisfaction optimale.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="d-flex justify-content-center m-4 mt-0 p-3">
+                                <button type="submit" class="btn btn-danger rounded-pill bold">Je trouve mon candidat</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-3 d-flex align-items-start p-3">
+                        <form class="border border-dark rounded-pill shadow"
+                              style="background-color: #d1ddfe"
+                              action="{% url 'payment:checkout' %}"
+                              method="POST">
+                            {% csrf_token %}
+                            {% for offer in offers %}
+                                {% if offer.name == "Intermédiaire" %}
+                                    <input type="hidden" name="priceId" value="{{ offer.price_id }}" />
+                                    <h3 class="fs-2 bold text-center m-3 mb-2">Intermédiaire</h3>
+                                    <div class="d-flex justify-content-center">
+                                        <h5 class="m-3 py-2 w-100 bg-vermillon text-center text-white bold"
+                                            style="border-radius: 100px">
+                                            <div>{{ offer.price }}€ HT</div>
+                                            <div style="font-size: 15px" class="pt-2">Pack valable 1 an</div>
+                                        </h5>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            <p class="explanation m-3 mb-0 text-danger">
+                                Publiez de 1 à 4  annonces sur notre plateforme avec une durée d’utilisation et de publication durant 1 an. Vous bénéficiez également d’un accès complet à toutes nos fonctionnalités.
+                            </p>
+                            <ul class="list-group">
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Recherche de candidats illimité</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Matching illimité</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Messagerie Instantanée</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Accompagnement à l'inscription</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Accompagnement à la rédaction de votre annonce</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.5rem; color: red;" class="bi bi-x"> </i>
+                                        </div>
+                                        <div class="col-10">Rdv 1 x par mois avec votre conseiller dédié</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.5rem; color: red;" class="bi bi-x"> </i>
+                                        </div>
+                                        <div class="col-10">Nous cherchons avec vous selon vos besoins pour une satisfaction optimale.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="d-flex justify-content-center m-4 mt-0 p-3">
+                                <button type="submit" class="btn btn-danger rounded-pill bold">Je trouve mon candidat</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-3 d-flex align-items-start p-3">
+                        <form class="border border-dark rounded-pill shadow"
+                              style="background-color: #d1ddfe"
+                              action="{% url 'payment:checkout' %}"
+                              method="POST">
+                            {% csrf_token %}
+                            {% for offer in offers %}
+                                {% if offer.name == "Illimité" %}
+                                    <input type="hidden" name="priceId" value="{{ offer.price_id }}" />
+                                    <h3 class="fs-2 bold text-center m-3 mb-2">Illimité</h3>
+                                    <div class="d-flex justify-content-center">
+                                        <h5 class="m-3 py-2 w-100 bg-vermillon text-center text-white bold"
+                                            style="border-radius: 100px">
+                                            <div>79€ HT/mois</div>
+                                            <div style="font-size: 15px" class="pt-2">Pendant 1 an</div>
+                                        </h5>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            <p class="explanation m-3 mb-0 text-danger">
+                                Publiez autant d’annonces que vous le souhaitez sur une année. Sans contrainte ni limite.
+                                Profitez d’une grande visibilité auprès de notre communauté d’étudiants, trouvez rapidement les candidats qui correspondent à vos critères de recherche.
+                            </p>
+                            <ul class="list-group">
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Recherche de candidats illimité</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Matching illimité</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Messagerie Instantanée</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Accompagnement à l'inscription</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Accompagnement à la rédaction de votre annonce</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Rdv 1 x par mois avec votre conseiller dédié</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Nous cherchons avec vous selon vos besoins pour une satisfaction optimale.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="d-flex justify-content-center m-4 mt-0 p-3">
+                                <button type="submit" class="btn btn-danger rounded-pill bold">Je trouve mon candidat</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-3 d-flex align-items-start p-3">
+                        <div class="border h-100 d-flex flex-column border-dark rounded-pill shadow"
+                             style="background-color: #d1ddfe">
+                            <h3 class="fs-2 bold text-center m-3 mb-2">Sur mesure</h3>
+                            <div class="d-flex justify-content-center">
+                                <h5 class="m-3 py-2 w-100 bg-vermillon text-center text-white bold"
+                                    style="border-radius: 100px">
+                                    <div>A partir de 529€ HT</div>
+                                    <div style="font-size: 15px" class="pt-2">/recrutement</div>
+                                </h5>
+                            </div>
+                            <p class="explanation m-3 mb-0 text-danger">
+                                Vous avez une entreprise à gérer et peu de temps pour chercher vos candidats ?
+                                Nous sommes la pour vous aider !  Notre équipe s'occupe de tout, en cherchant les candidats les mieux adaptés à votre culture d'entreprise.
+                            </p>
+                            <ul class="list-group">
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Prise en charge de tout votre processus de recrutement</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Présentation de votre candidat idéal selon vos critéres et directives</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item py-0" style="background-color: #d1ddfe">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i style="font-size: 1.4rem; color: #9291fd;" class="bi bi-check-lg"> </i> </i>
+                                        </div>
+                                        <div class="col-10">Paiement au succès</div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="d-flex mt-auto justify-content-center m-4 mt-0 p-3">
+                                <a type="button"
+                                   class="btn btn-danger rounded-pill bold"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#send_mail">Contactez-nous dès maintenant</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </small>
+    </small>
+    <div class="d-flex justify-content-center">
+        <h4 class="violine mt-5 text-center" style="max-width: 35ch">
+            Vous hésitez encore ? Contactez nous, un conseiller répondra à toutes vos questions
+        </h4>
+    </div>
+    <div class="d-flex justify-content-center">
+        <a type="button"
+           class="btn btn-outline-danger rounded-pill mt-3"
+           data-bs-toggle="modal"
+           data-bs-target="#send_mail">Contactez-nous</a>
+    </div>
+    <div class="d-flex justify-content-center">
+        <p class="bold mt-4">Appel possible au 06 59 78 64 61</p>
+    </div>
+    <div class="modal fade" id="send_mail" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Envoyer un email</h5>
+                    <button class="btn btn-outline-danger rounded-pill"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                        <i class="bi bi-x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form name="contact_form"
+                          action="{% url 'payment:mailOffres' %}"
+                          method="post">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label for="object" class="form-label required">Sujet</label>
+                                    <input type="text"
+                                           id="object"
+                                           name="object"
+                                           required="required"
+                                           class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label required">Message</label>
+                                    <textarea id="message"
+                                              name="message"
+                                              required="required"
+                                              rows="8"
+                                              class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-lg-12 text-end">
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-outline-danger rounded-pill mb-3">Envoyer</button>
+                                </div>
+                            </div>
+                        </div>
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

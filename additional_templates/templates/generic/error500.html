@@ -1,0 +1,14 @@
+{% extends 'generic/base_generic.html' %}
+{% block content %}
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="text-center">
+            <h1 class="display-1 fw-bold violine">500</h1>
+            <p class="fs-3 mx-5">
+                <span class="text-danger">Oups!</span> Une erreur interne s'est produite. Nous avons été notifié de l'erreur et corrigerons
+                le problème dès que possible.
+            </p>
+            <a href="{% url 'home:index' %}"
+               class="btn btn-danger bg-vermillon rounded-pill bold">Retourner à l'accueil</a>
+        </div>
+    </div>
+{% endblock content %}

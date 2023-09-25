@@ -1,0 +1,39 @@
+{% extends 'generic/base_generic.html' %}
+{% load static %}
+{% block imports %}
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          rel="stylesheet"
+          id="bootstrap-css" />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+            defer></script>
+    <script type="text/javascript"
+            src="{% static 'companies/base_companies.js' %}"
+            defer></script>
+    <script src="{% static 'companies/chat_page.js' %}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+          type="text/css"
+          rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'students/messages.css' %}" />
+{% endblock imports %}
+{% block content %}
+    <div x-data="studentComponent()">
+        <p class="text-muted">Cliquer sur les profils ci dessous afin de rafraîchir la conversation</p>
+        <div class="container-fluid row">
+            <div class="messaging col-lg-9">
+                <div class="inbox_msg">
+                    {% include "companies/chat_page/conversation-picker.html" with students=students %}
+                    {% include "companies/chat_page/feed.html" %}
+                </div>
+            </div>
+            <div class="col-lg-3 ps-3">
+                <div id="card"></div>
+                <p class="mt-4">Une fois que vous avez pu recruter votre étudiant, veuillez procéder au paiement.</p>
+                <button class="btn btn-danger rounded-pill my-3"
+                        data-bs-toggle="modal"
+                        data-bs-target="#paymentModal"
+                        role="button">Procéder au paiement</button>
+            </div>
+        </div>
+        {% include "companies/chat_page/payment-modal.html" %}
+    </div>
+{% endblock content %}

@@ -1,0 +1,76 @@
+{% extends 'mails/base_mail.html' %}
+{% block content %}
+    <p style="margin: 10px 0;
+              padding: 0;
+              mso-line-height-rule: exactly;
+              -ms-text-size-adjust: 100%;
+              -webkit-text-size-adjust: 100%;
+              color: #757575;
+              font-family: Helvetica;
+              font-size: 16px;
+              line-height: 150%;
+              text-align: left">
+        Cher(e) étudiant(e),
+        <br />
+        <br />
+        Nous sommes ravis de vous annoncer que vous avez obtenu un match avec une entreprise sur Leonework ! Cela signifie que l'entreprise est également intéressée par votre profil et que vous pouvez désormais entrer en contact avec eux via notre messagerie interne.
+        <br />
+        Nous vous encourageons vivement à envoyer un message à l'entreprise pour leur présenter  vos motivations.
+        <br />
+        N'oubliez pas que c'est l'occasion idéale d'échanger avec eux sur les opportunités de carrière disponibles et de leur poser des questions sur leur entreprise.
+        <br />
+        Nous vous rappelons également que la messagerie interne de leonework est conçue pour faciliter la communication entre les étudiants et les entreprises, vous pouvez donc utiliser cet outil en toute sécurité.
+        <br />
+        Nous vous souhaitons une excellente conversation et beaucoup de succès dans votre recherche d'opportunités sur leonework !
+        <br />
+        Si vous avez des questions, nous sommes toujours là pour vous, n’hésitez pas à nous contacter.
+        <br />
+        <br />
+        Cordialement,
+        <br />
+        <br />
+        Toute l’équipe de leonework
+    </p>
+{% endblock content %}
+{% block button %}
+    <table class="mcnButtonContentContainer"
+           style="border-collapse: separate !important;
+                  border-radius: 19px;
+                  background-color: #F0645A;
+                  mso-table-lspace: 0pt;
+                  mso-table-rspace: 0pt;
+                  -ms-text-size-adjust: 100%;
+                  -webkit-text-size-adjust: 100%"
+           cellspacing="0"
+           cellpadding="0"
+           border="0">
+        <tbody>
+            <tr>
+                <td class="mcnButtonContent"
+                    style="font-family: Helvetica;
+                           font-size: 18px;
+                           padding: 18px;
+                           mso-line-height-rule: exactly;
+                           -ms-text-size-adjust: 100%;
+                           -webkit-text-size-adjust: 100%"
+                    valign="middle"
+                    align="center">
+                    <a class="mcnButton "
+                       title="Inscription"
+                       href="https://leonework.com{% url 'students:matches' %}"
+                       target="_blank"
+                       style="font-weight: bold;
+                              letter-spacing: -0.5px;
+                              line-height: 100%;
+                              text-align: center;
+                              text-decoration: none;
+                              color: #FFFFFF;
+                              mso-line-height-rule: exactly;
+                              -ms-text-size-adjust: 100%;
+                              -webkit-text-size-adjust: 100%;
+                              display: block">Voir mes matchs</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock button %}

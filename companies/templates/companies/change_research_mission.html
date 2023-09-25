@@ -1,0 +1,53 @@
+{% extends 'generic/base_generic.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% block imports %}
+    <script type="text/javascript"
+            src="{% static 'companies/mission.js' %}"
+            defer></script>
+{% endblock imports %}
+{% block content %}
+    <form novalidate
+          action="{% url 'companies:change_research_mission' %}"
+          class="needs-validation row mt-5 d-flex justify-content-center"
+          method="post">
+        <div class="col-md-1"></div>
+        {% csrf_token %}
+        <div class="col-md-10">
+            <div class="mt-3 mb-4 bg-light bold border mx-3 py-2 text-center">
+                Poste sélectionné : <span class="bold text-danger">{{ job.proposed_job }}</span>
+            </div>
+            <h3 class="mb-3 violine text-center">
+                <b>Mission proposée</b>
+            </h3>
+            <div class="row">
+                <div class="col-md-6 px-4">
+                    {% bootstrap_field form.contract_type label_class='bold mb-3' %}
+                    {% bootstrap_field form.minimal_degree label_class='bold mb-3' %}
+                    <div class="row">
+                        <div class="col-lg-6">{% bootstrap_field form.beginning_date label_class='bold mb-2' %}</div>
+                        <div class="col-lg-6">{% bootstrap_field form.ending_date label_class='bold mb-2' %}</div>
+                    </div>
+                </div>
+                <div class="col-md-6 px-4">
+                    {% bootstrap_field form.proposed_job label_class='bold mb-3' %}
+                    {% bootstrap_field form.job_description label_class='bold mb-3' %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">{% bootstrap_field form.teleworking label_class='bold mb-3' %}</div>
+                <div class="col-lg-6">{% bootstrap_field form.hiring label_class='bold mb-3' %}</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">{% bootstrap_field form.work_weekend label_class='bold mb-3' %}</div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-danger rounded-pill my-4" role="button">Etape suivante</button>
+        </div>
+    </form>
+{% endblock content %}
+{% block script %}
+    <script defer>var metiers = {{metiers | safe}}</script>
+{% endblock script %}

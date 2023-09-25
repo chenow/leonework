@@ -1,0 +1,266 @@
+{% extends "generic/base_generic.html" %}
+{% load static %}
+{% block imports %}
+    <script type="text/javascript" src="{% static 'payment/offres.js' %}" defer></script>
+{% endblock imports %}
+{% block navbar_links %}
+    <li class="nav-item">
+        <a class="nav-link bold" href="#mission">Notre mission</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link bold" href="#feature">Comment ça marche ?</a>
+    </li>
+    {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"
+               href="#"
+               id="navbarDropdown"
+               role="button"
+               data-bs-toggle="dropdown"
+               aria-expanded="false">Mon compte</a>
+            <ul class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdown">
+                {% if user.is_superuser %}
+                    <li>
+                        <a class="dropdown-item" href="/administration/">Admin</a>
+                    </li>
+                {% endif %}
+                <li>
+                    <a class="dropdown-item" href="{% url 'welcome_pages:presentation' %}">Accueil</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{% url 'home:identity' %}">Mes infos</a>
+                </li>
+                {% if user.company_or_student == "company" and user.company.stripe_id %}
+                    <li>
+                        <a class="dropdown-item" href="{% url 'payment:compte' %}">Mes paiements</a>
+                    </li>
+                {% endif %}
+                <li>
+                    <a class="dropdown-item" href="{% url 'welcome_pages:delete_account' %}">Supression compte</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{% url 'home:faq' %}">FAQ</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{% url 'home:support' %}">Contact</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{% url 'welcome_pages:logout' %}">Déconnexion</a>
+                </li>
+            </ul>
+        </li>
+    {% else %}
+        <li class="nav-item me-2 mb-2">
+            <a class="btn btn-danger bg-vermillon rounded-pill bold"
+               href="{% url 'welcome_pages:register' %}">Inscription</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-outline-danger rounded-pill bold text-white"
+               href="{% url 'welcome_pages:login' %}">Connexion</a>
+        </li>
+    {% endif %}
+{% endblock navbar_links %}
+{% block content %}
+    <!-- Page Content-->
+    <div class="row gx-4 gx-lg-5 align-items-center my-5">
+        <div class="col-lg-6">
+            <h1 class="mb-5">
+                <span class="violine">Plateforme de recrutement</span> pour alternants, stagiaires,
+                apprentis
+            </h1>
+            <div class="mt-2 row">
+                <div class="col-1">
+                    <img src="{% static 'images/check.png' %}">
+                </div>
+                <div class="col-11">Solution de recrutement sur mesure dédiée à l'alternance.</div>
+            </div>
+            <div class="mt-2 row">
+                <div class="col-1">
+                    <img src="{% static 'images/check.png' %}">
+                </div>
+                <div class="col-11">Nous collaborons ensemble pour identifier et cibler vos besoins spécifiques.</div>
+            </div>
+            <div class="mt-2 row">
+                <div class="col-1">
+                    <img src="{% static 'images/check.png' %}">
+                </div>
+                <div class="col-11">
+                    Nous prenons en charge la recherche de vos candidats avec ou sans votre utilisation de la plateforme.
+                </div>
+            </div>
+            <div class="mt-2 row">
+                <div class="col-1">
+                    <img src="{% static 'images/check.png' %}">
+                </div>
+                <div class="col-11">
+                    Diffusez gratuitement vos offres sur notre site et accédez à  plus de 2000 profils d’étudiants inscrits.
+                </div>
+            </div>
+            <div class="mt-5">
+                <a class="btn btn-danger bg-vermillon rounded-pill bold"
+                   href="{% url 'welcome_pages:register' %}">Inscription</a>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <img src="{% static 'images/illustration-baseline.png' %}"
+                 class="img-fluid">
+        </div>
+    </div>
+    <div class="row spacer" id="mission">&nbsp;</div>
+    <div class="row gx-4 gx-lg-5 align-items-center my-5">
+        <div class="col-lg-6">
+            <img src="{% static 'images/illustration-about.png' %}" class="img-fluid">
+        </div>
+        <div class="col-lg-6">
+            <p>
+                <h1 class="violine bold">Notre mission</h1>
+            </p>
+            <div class="mt-2">
+                <img src="{% static 'images/bullet.jpg' %}">
+                Manque de temps ? Vous ne savez pas où chercher ?  Vos candidatures ne correspondent pas à  vos recherches ?
+            </div>
+            <div class="mt-2">
+                <img src="{% static 'images/bullet.jpg' %}">
+                Aujourd'hui, le recrutement d'alternants et de stagiaires représente des enjeux et des difficultés qui nécessitent du temps, des  ressources et un réseau pour trouver des profils en adéquation aux critères  souhaités.
+            </div>
+            <div class="mt-2">
+                <img src="{% static 'images/bullet.jpg' %}">
+                Pour résoudre l’ensemble  de vos problématiques, leonework vous assure un recrutement personnalisé, rapide et efficace.
+            </div>
+            <div class="mt-5">
+                <a class="btn btn-danger bg-vermillon rounded-pill bold"
+                   href="{% url 'welcome_pages:register' %}">Inscription</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 text-center raisonetre">
+            “ Réunir les entreprises et les apprenants autour de leurs valeurs communes ”
+        </div>
+    </div>
+    <div class="row spacer" id="feature">&nbsp;</div>
+    <div class="row gx-4 gx-lg-5 align-items-center my-5">
+        <div class="col-lg-12 text-center mt-5">
+            <p>
+                <span class="violine bold">Simplicité, facilité, rapidité, efficacité</span>
+            </p>
+        </div>
+        <div class="col-lg-4 text-center">
+            <img src="{% static 'images/comment-ca-marche-1.png' %}" class="img-fluid">
+            <h3>Je m'inscris</h3>
+            <p>
+                Je crée mon profil selon
+                <br>
+                mes critères, mes valeurs
+            </p>
+        </div>
+        <div class="col-lg-4 text-center">
+            <img src="{% static 'images/comment-ca-marche-2.png' %}" class="img-fluid">
+            <h3>Je like et je match</h3>
+            <p>
+                Je like et je match avec les candidats / entreprises
+                <br>
+                qui me correspondent
+            </p>
+        </div>
+        <div class="col-lg-4 text-center">
+            <img src="{% static 'images/comment-ca-marche-3.png' %}" class="img-fluid">
+            <h3>Je rentre en contact</h3>
+            <p>Je discute, j'échange dans notre messagerie instantanée</p>
+        </div>
+    </div>
+    <div class="row spacer" id="feature">&nbsp;</div>
+    <div class="row text-center mb-5 justify-content-md-center">
+        <div class="col-12">
+            <h4>Vous avez une question, un problème, une suggestion ? Écrivez-nous !</h4>
+        </div>
+        <div class="">
+            <a type="button"
+               class="btn btn-outline-danger rounded-pill"
+               data-bs-toggle="modal"
+               data-bs-target="#send_mail">Contactez-nous</a>
+        </div>
+        <div class="mt-3">
+            <a type="button"
+               class="btn btn-outline-danger rounded-pill"
+               href="https://calendly.com/audrey-leonework/15m">Demandez un rendez-vous en ligne</a>
+        </div>
+    </div>
+    <div class="modal fade" id="send_mail" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Envoyer un email</h5>
+                    <button class="btn btn-outline-danger rounded-pill"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                        <i class="bi bi-x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form novalidate
+                          name="contact_form"
+                          action="{% url 'welcome_pages:mail' %}"
+                          method="post">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label for="email" class="form-label required">
+                                        Votre
+                                        email
+                                    </label>
+                                    <input type="email"
+                                           id="email"
+                                           name="email"
+                                           required="required"
+                                           class="form-control">
+                                </div>
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="object" class="form-label required">Sujet</label>
+                                    <input type="text"
+                                           id="object"
+                                           name="object"
+                                           required="required"
+                                           class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label required">Message</label>
+                                    <textarea id="message"
+                                              name="message"
+                                              required="required"
+                                              rows="8"
+                                              class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-lg-12 text-end">
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-outline-danger rounded-pill mb-3">Envoyer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row"></div>
+</div>
+<div class="container-fluid px-4 px-lg-5 py-5 bg-cobalt">
+    <div class="col-lg-6 offset-lg-3 text-center text-white">
+        <h2 class="bold">Prêt à tenter l'aventure ?</h2>
+        <p class="mt-5">
+            Que cela soit le candidat idéal ou l'entreprise de vos rêves, ici vous allez trouver la perle
+            rare !
+            Plus besoin de chercher, notre algorithme trouve pour vous le profil adapté à vos besoins.
+        </p>
+        <p>
+            <a class="btn btn-danger bg-vermillon rounded-pill bold mt-5"
+               href="{% url 'welcome_pages:register' %}">Inscription</a>
+        </p>
+    </div>
+</div>
+{% endblock content %}

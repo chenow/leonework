@@ -1,0 +1,54 @@
+{% extends 'generic/base_generic.html' %}
+{% block content %}
+    {% load bootstrap5 %}
+    <div class='row py-5'>
+        <h1 class='text-center'>Connexion</h1>
+    </div>
+    <div class="row justify-content-lg-center">
+        <div class="col-lg-4">
+            <form novalidate
+                  action="/login/"
+                  method="post"
+                  class='d-flex justify-content-center flex-column'>
+                {% csrf_token %}
+                {% bootstrap_field form.email %}
+                {% bootstrap_field form.password %}
+                <div>
+                    <input type="checkbox" class="m-3" onclick="myFunction()">
+                    Afficher le mot de passe
+                </div>
+                <input name="next" type="hidden" id="next_input">
+                <div class="text-muted text-center">
+                    <a href="{% url 'password_reset' %}">Mot de passe oublié ?</a>
+                </div>
+                <button type="submit" class="btn btn-danger rounded-pill my-4">Je me connecte</button>
+            </form>
+        </div>
+        <div class="row d-flex justify-content-lg-center my-5">
+            <div class="d-flex justify-content-lg-center">
+                Vous n'avez pas encore de compte ?<a class='px-2' href="{% url 'welcome_pages:register' %}">Inscrivez-vous</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block script %}
+    <script defer>
+        window.addEventListener('load', function () {
+            let url = new URL(document.URL);
+            let next = url.searchParams.get('next')
+            if (next == null){
+                document.getElementById('next_input').value = '/'
+            } else{
+            document.getElementById('next_input').value = url.searchParams.get('next');}
+          })
+
+          function myFunction() {
+            var x = document.getElementById("id_password");
+            if (x.type === "password") {
+              x.type = "text";
+            } else {
+              x.type = "password";
+            }
+          }
+    </script>
+{% endblock script %}

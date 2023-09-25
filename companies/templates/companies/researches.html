@@ -1,0 +1,265 @@
+{% extends 'generic/base_generic.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% block bg_color %}
+    background-color: rgba(230, 245, 225, 0.2)!important;
+{% endblock bg_color %}
+{% block imports %}
+    <script type="text/javascript"
+            src="{% static 'companies/candidat.js' %}"
+            defer></script>
+    <script type="text/javascript"
+            src="{% static 'companies/mission.js' %}"
+            defer></script>
+{% endblock imports %}
+{% block content %}
+    <h2 class="mb-3 mt-4 violine text-center">
+        <b>Mes recherches</b>
+    </h2>
+    <ul class="nav nav-tabs d-flex justify-content-center mb-5 border-bottom">
+        {% for possible_job in jobs %}
+            <li class="nav-item">
+                <a class="nav-link text-dark pb-3 {% if possible_job.pk == job.pk %}bold{% endif %}"
+                   {% if possible_job.pk == job.pk %}style="border-bottom: 2px solid black"{% endif %}
+                   {% if possible_job.pk == job.pk %}aria-current="page"{% endif %}
+                   href="{% url 'companies:researches' possible_job.pk %}">{{ possible_job.proposed_job }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="card shadow mt-5">
+        <div class="card-body">
+            <form novalidate
+                  action="{% url 'companies:researches' %}"
+                  class="needs-validation row d-flex justify-content-center"
+                  method="post">
+                {% csrf_token %}
+                {{ form.langues_parlees.as_hidden }}
+                {{ form.qualities.as_hidden }}
+                {{ form.spoken_languages.as_hidden }}
+                <div class="card-header d-flex justify-content-between bg-white bold mb-5">
+                    <h4 class="violine bold">Quel est votre candidat idéal ?</h4>
+                    <div>
+                        <div class="me-3">
+                            Supprimer ma recherche
+                            <a class="violine"
+                               style="text-decoration: none"
+                               href='#'
+                               data-bs-toggle="modal"
+                               data-bs-target="#delete_profile">
+                                <i style='font-size: 1.2em' class="ps-3 bi bi-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 px-5">
+                        <div>
+                            <label class="bold mb-3" for="id_contract_type">Ses qualités principales</label>
+                            <span class='ps-3 text-muted'>(5 maximum)</span>
+                            <div id="qualities" class="mb-3 d-flex justify-content-left flex-wrap">
+                                <div style="width: 100%">
+                                    <button type="button"
+                                            class="mb-3 btn btn-danger rounded-pill"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#qualitiesModal">Choisissez des qualités</button>
+                                </div>
+                                {% for quality in qualities %}
+                                    <div class="mx-2 mb-3 border rounded-pill py-2 px-3 d-flex">
+                                        <span class='text-center'>{{ quality }}</span>
+                                        <button type="button"
+                                                onclick="remove_qualite(this)"
+                                                quality="{{ quality }}"
+                                                class="btn-close"
+                                                aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% bootstrap_label form.minimal_degree.label label_class='bold mb-2' %}
+                        <br />
+                        <div class="text-muted mb-2">Tous les étudiants des niveaux similaires et supérieurs ressortiront.</div>
+                        {% bootstrap_field form.minimal_degree show_label='skip' label_class='bold mb-3' %}
+                        <div class="row">
+                            <div class="col-lg-6">{% bootstrap_field form.beginning_date label_class='bold mb-2' %}</div>
+                            <div class="col-lg-6">{% bootstrap_field form.ending_date label_class='bold mb-2' %}</div>
+                            <div class="text-muted mb-3">Nous vous présenterons les étudiants avec 3 mois de flexibilité</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 px-5">
+                        <label class="bold mb-3" for="id_contract_type">Il parle</label>
+                        <div id="languages" class="mb-3 d-flex justify-content-left flex-wrap">
+                            <div style="width: 100%">
+                                <button type="button"
+                                        class="mb-3 btn btn-danger rounded-pill"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#langueModal">Ajouter une langue</button>
+                            </div>
+                            {% for lang, level in spoken_languages %}
+                                <div id="chosen_{{ lang }}"
+                                     class="mx-2 mb-3 container-fluid border rounded-pill py-2 px-3">
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <span class='text-center violine'><b>{{ lang }}</b></span>
+                                            <select onchange='add_language_level("{{ lang }}", this.options[this.selectedIndex].value)'
+                                                    class="form-select"
+                                                    aria-label="Niveau de langue">
+                                                <option value="debutant" {% if level == 'debutant' %}selected{% endif %}>Débutant</option>
+                                                <option value="intermediaire"
+                                                        {% if level == 'intermediaire' %}selected{% endif %}>
+                                                    Intermédiaire
+                                                </option>
+                                                <option value="avancee" {% if level == 'avancee' %}selected{% endif %}>Avancé</option>
+                                                <option value="bilingue" {% if level == 'bilingue' %}selected{% endif %}>Bilingue</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-1 align-items-center">
+                                            <button type="button"
+                                                    onclick="remove_lang('{{ lang }}')"
+                                                    class="btn-close"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="card-header mt-5 d-flex justify-content-between bg-white bold mb-5">
+                        <h4 class="violine bold">Quelle type de mission proposez-vous ?</h4>
+                        <div></div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-6 px-5 mb-4">
+                            {% bootstrap_field form.contract_type label_class='bold mb-3' %}
+                            <label class="bold mb-1">Lieu de la mission</label>
+                            <br />
+                            <p class="text-muted mb-3">
+                                Si la mission se déroule sur une petite localité merci de renseigner la grande ville la plus proche.
+                            </p>
+                            {% bootstrap_field form.job_location label_class='bold mb-3' show_label='skip' %}
+                            <label class="bold mb-1 mt-2">Intitulé du poste</label>
+                            <br />
+                            <p class="text-muted mb-3">
+                                Choisissez un poste, les domaines associés à ceux ci sont
+                                automatiques, vous pourrez choisir les élèves par poste ou par domaine
+                                d’activité.
+                            </p>
+                            {% bootstrap_field form.proposed_job label_class='bold mb-3' show_label='skip' %}
+                        </div>
+                        <div class="col-md-6 px-5">{% bootstrap_field form.job_description label_class='bold mb-3' %}</div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 px-5">{% bootstrap_field form.teleworking label_class='bold mb-3' %}</div>
+                        <div class="col-lg-6 px-5">{% bootstrap_field form.hiring label_class='bold mb-3' %}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 px-5">{% bootstrap_field form.work_weekend label_class='bold mb-3' %}</div>
+                        <div class="col-lg-6 px-5">{% bootstrap_field form.autonomy label_class='bold mb-3' %}</div>
+                    </div>
+                </div>
+                <div class="d-flex flex-row-reverse mx-5">
+                    <button type="submit" class="btn btn-danger rounded-pill my-4" role="button">Enregistrer les modifications</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal fade"
+         id="delete_profile"
+         tabindex="-1"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Retirer mon annonce</h1>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Vous êtes sur le point de retirer votre annonce pour <b>{{ job.proposed_job }}</b>, cette action est irréversible.
+                </div>
+                <a href="{% url 'companies:delete_profil' %}"
+                   class="btn btn-danger bg-vermillon bold rounded-pill mx-4 mt-5 mb-3"
+                   style="max-width: 150px"
+                   role="button">Suppression</a>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn violine bold rounded-pill"
+                            data-bs-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade"
+         id="langueModal"
+         tabindex="-1"
+         aria-labelledby="langModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="langModalLabel">Langues</h1>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% for language in all_languages %}
+                        <a onclick='changeColorLanguage(this);'
+                           language='{{ language }}'
+                           class="btn border rounded-pill my-3 mx-2 {% if language in chosen_langs %}logo_color{% endif %}">{{ language }}
+                        </a>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-danger rounded-pill"
+                            data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade"
+         id="qualitiesModal"
+         tabindex="-1"
+         aria-labelledby="qualitiesModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="qualitiessModalLabel">Qualités</h1>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% for quality in all_qualities %}
+                        <a onclick='changeColorQualite(this);'
+                           quality='{{ quality }}'
+                           class="btn border rounded-pill my-3 mx-2 {% if quality in qualities %}logo_color{% endif %}">{{ quality }}
+                        </a>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-danger rounded-pill"
+                            data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block script %}
+    <script defer type="text/javascript">
+    all_qualities = {{ all_qualities | safe }}
+    qualities = {{ qualities | safe }}
+    spoken_languages = {{ spoken_languages | safe }}
+    chosen_languages = {{ chosen_languages | safe }}
+    all_languages = {{ language | safe }}
+    cities = {{ cities | safe }}
+    professions = {{professions | safe}}
+    </script>
+{% endblock script %}

@@ -1,0 +1,23 @@
+{% for type, ent, duree in experiences %}
+    <div class="row mb-3">
+        <div class="col-md-4 mb-3">
+            <label class="mb-2">Type d'expérience</label>
+            <span class="form-control">{{ type }}</span>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label class="mb-2">Entreprise</label>
+            <span class="form-control">{{ ent }}</span>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label class="mb-2">Durée</label>
+            <span class="form-control">{{ duree }}</span>
+        </div>
+        <div class="col-md-3 mb-3">
+            <button experience="{{ forloop.counter0 }}"
+                    type="button"
+                    class="btn-close position-relative top-50 start-0 translate-middle-y"
+                    aria-label="Close"
+                    onclick="delete_experience(this.getAttribute('experience'));"></button>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,22 @@
+{% extends "generic/base_generic.html" %}
+{% load static %}
+{% block content %}
+    <div class="row my-4">
+        <div class="col-12 text-center">
+            <h1>Cookies</h1>
+        </div>
+    </div>
+    <div class="row gx-4 gx-lg-5 align-items-center my-5">
+        <div class="col-lg-6">
+            <h2>Chez nous les cookies on les mange !</h2>
+            <p>
+                Ainsi vous ne trouverez qu'un seul cookie pour maintenir votre connection (quand vous êtes connecté bien
+                sur).
+            </p>
+        </div>
+        <div class="col-lg-6">
+            <img src="{% static 'images/cookies.png' %}" class="img-fluid">
+        </div>
+    </div>
+    <div class="row"></div>
+{% endblock content %}

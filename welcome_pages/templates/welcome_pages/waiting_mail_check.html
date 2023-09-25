@@ -1,0 +1,28 @@
+{% extends "generic/base_generic.html" %}
+{% load bootstrap5 %}
+{% block content %}
+    <div class='row py-5'>
+        <h1 class='text-center'>Validation de votre email</h1>
+    </div>
+    <div class="row justify-content-lg-center">
+        <div class="col-lg-6 text-center">
+            <div>
+                Nous avons envoyé un mail de validation à <b>{{ user.email }}</b>. Veuillez cliquer
+                sur le lien de validation
+                afin d'activer votre compte. Si vous n'avez pas reçu de mail, veuillez vérifier votre email et refaire un
+                compte si celui-ci est éronné.
+            </div>
+            <div class='mt-4'>
+                Vous n'avez pas reçu ou perdu le mail de validation ? Vous pouvez redemander un lien en saisissant votre
+                mail.
+            </div>
+            <form novalidate
+                  action="{% url 'welcome_pages:waiting_mail_check' %}"
+                  method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <button type="submit" class="btn btn-danger rounded-pill my-4">Demander un nouveau lien</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
