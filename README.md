@@ -17,7 +17,7 @@ The website includes:
 
 ### Prerequisites
 
-Having a python environment with python 3.6 or higher.
+Having a python environment with python 3.10 or higher.
 having a postgresql database with a user and a password.
 A docker-compose file is provided to setup a postgresql database. To do so, run:
 
