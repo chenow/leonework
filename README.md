@@ -28,11 +28,11 @@ A docker-compose file is provided to setup a postgresql database. To do so, run:
 -   Complete the .env file following .env.example variables.
 -   Setup an environment
 -   Install the requirements
-    ```
+    ```bash
     pip install -r freeze.txt
     ```
 -   Create the database
-    ```
+    ```bash
     python manage.py migrate
     ```
 
@@ -42,8 +42,8 @@ Default users are created with the first migration.
 
 Run the server with the following command:
 
-    ```
-    python manage.py runserver
-    ```
+```bash
+python manage.py runserver
+```
 
 Then navigate to http://127.0.0.1:8000
